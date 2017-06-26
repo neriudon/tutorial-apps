@@ -33,6 +33,7 @@ public class Todo implements Serializable {
 
     // (2)
     @Id
+    // (3)
     @Column(name = "todo_id")
     private String todoId;
 
@@ -42,9 +43,9 @@ public class Todo implements Serializable {
     @Column(name = "finished")
     private boolean finished;
 
-    // (3)
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
+    // (4)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     public String getTodoId() {

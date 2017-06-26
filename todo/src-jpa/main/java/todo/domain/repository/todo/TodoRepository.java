@@ -24,8 +24,7 @@ import todo.domain.model.Todo;
 // (1)
 public interface TodoRepository extends JpaRepository<Todo, String> {
 
-    @Query("SELECT COUNT(t) FROM Todo t WHERE t.finished = :finished") // (2)
+    @Query(value = "SELECT COUNT(x) FROM Todo x WHERE x.finished = :finished") // (2)
     long countByFinished(@Param("finished") boolean finished); // (3)
 
 }
-

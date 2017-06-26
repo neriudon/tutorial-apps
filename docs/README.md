@@ -9,9 +9,6 @@ The following table summarizes directory contents.
 | todo | Scripts and sources to genarate completed Todo Application tutorial. |
 | todo-rest | Scripts and sources to genarate completed Todo Application REST tutorial. |
 | first-spring-security | Scripts and sources to genarate completed Spring Security tutorial. |
-| session-tutorial-init | Scripts and sources to genarate Session tutorial for starting it. |
-| session-tutorial-complete | Scripts and sources to genarate completed Session tutorial. |
-| secure-login-demo | Scripts and sources to genarate completed Implementation Example of Typical Security Requirements. |
 
 ## Shell scripts and Tutorial sources
 The following table describe Shell scripts functionality.
@@ -28,8 +25,7 @@ The following table describe Shell scripts functionality.
 | common/scripts/change-maven-settings.sh | Copy maven settings.xml from ``~/.m2`` directory and configure archetype repository. |
 
 ## How to execute
-You can execute ``create-app.sh`` with no parameters to genarate tutorial applications.  
-If you want to use snapshot version's archetype, previously execute ``change-maven-settings.sh``.  
+You can execute ``change-maven-settings.sh`` and then ``create-app.sh`` with no parameters to genarate tutorial applications.  
 First of all, you must set following environment variables.
 
 | Environment Variable | Description | Note |
@@ -39,11 +35,3 @@ First of all, you must set following environment variables.
 | GROUP_ID | Group ID of tutorial project. | You must set to same value as tutorial instructions explained in Development Guideline. |
 | ARTIFACT_ID | Artifact ID of tutorial project. | Basically, set to same value as tutorial instructions explained in Development Guideline. |
 | VERSION | Version of tutorial project. | Basically, set to same value as tutorial instructions explained in Development Guideline. |
-
-You can also set following optional environment variables.
-
-| Environment Variable | Description | Note |
-|:------------- |:----------------- |:----------------- |
-| HOST_IP | IP address for access to tutorial application. (i.e. Web/AP Server address) | Defaults to ``localhost``.<br> (Only use in ``secure-login-demo``.) |
-| APSRV_WEB_PORT | Port number for access to tutorial application. (i.e. Web/AP Server port number) | Defaults to ``8080``.<br> (Only use in ``secure-login-demo``.) |
-| APSRV_H2DB_PORT | Port number for access to H2DB on the AP Server. | Defaults to ``9212``. This is used for access from selenium test. On the AP Server, H2DB TCP Server starting up on fixed port ``9212``.<br> (Only use in ``secure-login-demo``.) |

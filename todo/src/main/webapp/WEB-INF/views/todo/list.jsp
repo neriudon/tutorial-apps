@@ -3,9 +3,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Todo List</title>
-<!-- (1) -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/app/css/styles.css" type="text/css">
 </head>
+<style type="text/css">
+.strike {
+    text-decoration: line-through;
+}
+
+.alert {
+    border: 1px solid;
+}
+
+.alert-error {
+    background-color: #c60f13;
+    border-color: #970b0e;
+    color: white;
+}
+
+.alert-success {
+    background-color: #5da423;
+    border-color: #457a1a;
+    color: white;
+}
+
+.text-error {
+    color: #c60f13;
+}
+</style>
 <body>
     <h1>Todo List</h1>
 
@@ -17,7 +40,7 @@
             method="post" modelAttribute="todoForm">
             <form:input path="todoTitle" />
             <form:errors path="todoTitle" cssClass="text-error" />
-            <form:button>Create Todo</form:button>
+            <input type="submit" value="Create Todo" />
         </form:form>
     </div>
     <hr />
@@ -37,7 +60,8 @@
                                 cssStyle="display: inline-block;">
                                 <form:hidden path="todoId"
                                     value="${f:h(todo.todoId)}" />
-                                <form:button>Finish</form:button>
+                                <input type="submit" name="finish"
+                                    value="Finish" />
                             </form:form>
                         </c:otherwise>
                     </c:choose>
@@ -47,7 +71,7 @@
                         cssStyle="display: inline-block;">
                         <form:hidden path="todoId"
                             value="${f:h(todo.todoId)}" />
-                        <form:button>Delete</form:button>
+                        <input type="submit" value="Delete" />
                     </form:form>
                 </li>
             </c:forEach>
@@ -55,4 +79,3 @@
     </div>
 </body>
 </html>
-

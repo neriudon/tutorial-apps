@@ -15,8 +15,8 @@
  */
 package todo.selenium.todo;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
@@ -60,7 +60,7 @@ public class TodoTest extends FunctionTestSupport {
 
 		inputFieldAccessor.overrideValue(By.id("todoTitle"), "todoThings1",driver);
 		driver.findElement(By.xpath("//form[@action='/" + contextName
-				+ "/todo/create']/button")).click();;
+				+ "/todo/create']/input[@type='submit']")).click();;
 
 		WebElement todoElement = driver.findElement(By
 				.xpath("//div[@id='todoList']/ul/li"));
@@ -71,7 +71,7 @@ public class TodoTest extends FunctionTestSupport {
 		assertThat(todoElement.getText(), is(containsString("todoThings1")));
 		todoElement.findElement(
 				By.xpath("//form[@action='/" + contextName
-						+ "/todo/delete']/button")).click();
+						+ "/todo/delete']/input[@type='submit']")).click();
 	}
 
 	/**
@@ -82,10 +82,10 @@ public class TodoTest extends FunctionTestSupport {
 
 		inputFieldAccessor.overrideValue(By.id("todoTitle"), "todoThings1",driver);
 		driver.findElement(By.xpath("//form[@action='/" + contextName
-				+ "/todo/create']/button")).click();
+				+ "/todo/create']/input[@type='submit']")).click();
 		driver.findElement(By
 				.xpath("//div[@id='todoList']/ul/li/form[@action='/"
-						+ contextName + "/todo/finish']/button")).click();
+						+ contextName + "/todo/finish']/input[@type='submit']")).click();
 
 		WebElement todoElement = driver.findElement(By
 				.xpath("//div[@id='todoList']/ul/li"));
@@ -97,7 +97,7 @@ public class TodoTest extends FunctionTestSupport {
 
 		todoElement.findElement(
 				By.xpath("//form[@action='/" + contextName
-						+ "/todo/delete']/button")).click();
+						+ "/todo/delete']/input[@type='submit']")).click();
 	}
 
 	/**
@@ -108,10 +108,10 @@ public class TodoTest extends FunctionTestSupport {
 
 		inputFieldAccessor.overrideValue(By.id("todoTitle"), "todoThings1",driver);
 		driver.findElement(By.xpath("//form[@action='/" + contextName
-				+ "/todo/create']/button")).click();;
+				+ "/todo/create']/input[@type='submit']")).click();;
 		driver.findElement(By
 				.xpath("//div[@id='todoList']/ul/li/form[@action='/"
-						+ contextName + "/todo/delete']/button")).click();
+						+ contextName + "/todo/delete']/input[@type='submit']")).click();
 
 		assertThat(driver.findElement(By
 				.xpath("//div[@class='alert alert-success']/ul/li")).getText(),
@@ -128,7 +128,7 @@ public class TodoTest extends FunctionTestSupport {
 	public void testCreateEmpty() throws IOException {
 
 		driver.findElement(By.xpath("//form[@action='/" + contextName
-				+ "/todo/create']/button")).click();;
+				+ "/todo/create']/input[@type='submit']")).click();;
 
 		assertThat(driver.findElement(By
 				.xpath("//span[@id='todoTitle.errors']")).getText(),
@@ -144,7 +144,7 @@ public class TodoTest extends FunctionTestSupport {
 		inputFieldAccessor.overrideValue(By.id("todoTitle"),
 				"0123456789012345678901234567890",driver);
 		driver.findElement(By.xpath("//form[@action='/" + contextName
-				+ "/todo/create']/button")).click();;
+				+ "/todo/create']/input[@type='submit']")).click();;
 
 		assertThat(driver.findElement(By
 				.xpath("//span[@id='todoTitle.errors']")).getText(),
@@ -162,7 +162,7 @@ public class TodoTest extends FunctionTestSupport {
 			inputFieldAccessor.overrideValue(By.id("todoTitle"),
 					Integer.toString(i),driver);
 			driver.findElement(By.xpath("//form[@action='/"
-					+ contextName + "/todo/create']/button")).click();
+					+ contextName + "/todo/create']/input[@type='submit']")).click();
 		}
 
 		assertThat(driver.findElement(By
@@ -172,7 +172,7 @@ public class TodoTest extends FunctionTestSupport {
 		for (int i = 0; i < 5; i++) {
 			driver.findElement(By
 					.xpath("//div[@id='todoList']/ul/li/form[@action='/"
-							+ contextName + "/todo/delete']/button")).click();;
+							+ contextName + "/todo/delete']/input[@type='submit']")).click();;
 		}
 
 	}

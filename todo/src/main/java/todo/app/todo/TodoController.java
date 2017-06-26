@@ -106,7 +106,7 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST) // (1)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String delete(
             @Validated({ Default.class, TodoDelete.class }) TodoForm form,
             BindingResult bindingResult, Model model,

@@ -24,8 +24,4 @@ bash ../scripts/convert-todo-test.sh `pwd`
 
 bash ../../common/scripts/convert-common-infra.sh `pwd`
 
-bash ../../common/scripts/convert-common-css.sh `pwd`
-
-bash ../scripts/convert-todo-css.sh `pwd`
-
 popd

@@ -16,45 +16,68 @@
 package todo.domain.repository.todo;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
+import javax.inject.Inject;
+
+import jp.terasoluna.fw.dao.QueryDAO;
+import jp.terasoluna.fw.dao.UpdateDAO;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import todo.domain.model.Todo;
 
 @Repository // (1)
+@Transactional // (2)
 public class TodoRepositoryImpl implements TodoRepository {
-    private static final Map<String, Todo> TODO_MAP = new ConcurrentHashMap<String, Todo>();
 
+    // (3)
+    @Inject
+    QueryDAO queryDAO;
+
+    @Inject
+    UpdateDAO updateDAO;
+
+    // (4)
     @Override
+    @Transactional(readOnly = true)
     public Todo findOne(String todoId) {
-        return TODO_MAP.get(todoId);
+        return queryDAO.executeForObject("todo.findOne", todoId, Todo.class);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection<Todo> findAll() {
-        return TODO_MAP.values();
+        return queryDAO.executeForObjectList("todo.findAll", null);
     }
 
     @Override
     public Todo save(Todo todo) {
-        return TODO_MAP.put(todo.getTodoId(), todo);
+        // (5)
+        if (exists(todo.getTodoId())) {
+            updateDAO.execute("todo.update", todo);
+        } else {
+            updateDAO.execute("todo.create", todo);
+        }
+        return todo;
+    }
+
+    @Transactional(readOnly = true)
+    public boolean exists(String todoId) {
+        long count = queryDAO.executeForObject("todo.exists", todoId,
+                Long.class);
+        return count > 0;
     }
 
     @Override
     public void delete(Todo todo) {
-        TODO_MAP.remove(todo.getTodoId());
+        updateDAO.execute("todo.delete", todo);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public long countByFinished(boolean finished) {
-        long count = 0;
-        for (Todo todo : TODO_MAP.values()) {
-            if (finished == todo.isFinished()) {
-                count++;
-            }
-        }
-        return count;
+        return queryDAO.executeForObject("todo.countByFinished", finished,
+                Long.class);
     }
 }

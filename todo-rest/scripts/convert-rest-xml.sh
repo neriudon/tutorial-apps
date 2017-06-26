@@ -61,7 +61,13 @@ find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|<sec:http patte
     <sec:http pattern="/resources/**" security="none" />\
 \
     <!-- (1) -->\
-    <sec:http pattern="/api/v1/**" security="none" />\
+    <sec:http\
+        pattern="/api/v1/**"\
+        auto-config="true"\
+        use-expressions="true"\
+        create-session="stateless">\
+        <sec:headers />\
+    </sec:http>\
 |'
 
 if test -n $TARGET_DIR; then
