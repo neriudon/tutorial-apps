@@ -15,10 +15,8 @@
  */
 package org.terasoluna.securelogin.selenium.loginform.page.login;
 
-import org.springframework.core.io.ResourceLoader;
 import org.terasoluna.gfw.tutorial.selenium.WebDriverOperations;
 import org.terasoluna.securelogin.selenium.loginform.page.AbstractPageObject;
-import org.terasoluna.securelogin.selenium.loginform.page.account.AccountCreatePage;
 import org.terasoluna.securelogin.selenium.loginform.page.passwordchange.PasswordChangePage;
 import org.terasoluna.securelogin.selenium.loginform.page.passwordreissue.CreateReissueInfoPage;
 import org.terasoluna.securelogin.selenium.loginform.page.welcome.TopPage;
@@ -62,13 +60,6 @@ public class LoginPage extends AbstractPageObject {
 
 	public String getLoginError() {
 		return webDriverOperations.getText(id("loginError"));
-	}
-
-	public AccountCreatePage goToAccountCreatePage(ResourceLoader resourceLoader) {
-		webDriverOperations.click(id("create"));
-		waitDefaultInterval();
-		return new AccountCreatePage(webDriverOperations,
-				applicationContextUrl, resourceLoader);
 	}
 
 	public CreateReissueInfoPage goToCreateReissueInfoPage() {

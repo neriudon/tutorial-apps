@@ -50,8 +50,7 @@ public class PasswordReissueController {
 			return showCreateReissueInfoForm(form);
 		}
 
-		String rawSecret = passwordReissueService.createAndSendReissueInfo(form
-				.getUsername());
+		String rawSecret = passwordReissueService.createAndSendReissueInfo(form.getUsername());
 		attributes.addFlashAttribute("secret", rawSecret);
 		return "redirect:/reissue/create?complete";
 	}
@@ -65,7 +64,7 @@ public class PasswordReissueController {
 	public String showPasswordResetForm(PasswordResetForm form, Model model,
 			@RequestParam("token") String token) {
 
-		PasswordReissueInfo info = passwordReissueService.findOne(token);
+		PasswordReissueInfo info = passwordReissueService.findOne(token); // existence check
 
 		form.setUsername(info.getUsername());
 		form.setToken(token);

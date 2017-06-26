@@ -75,17 +75,8 @@ public class PasswordReissueServiceImpl implements PasswordReissueService {
 	@Value("${security.tokenLifeTimeSeconds}")
 	int tokenLifeTimeSeconds;
 
-	@Value("${app.host}")
-	String host;
-
-	@Value("${app.port}")
-	String port;
-
-	@Value("${app.contextPath}")
-	String contextPath;
-
-	@Value("${app.passwordReissueProtocol}")
-	String protocol;
+	@Value("${app.applicationBaseUrl}")
+	String baseUrl;
 
 	@Value("${security.tokenValidityThreshold}")
 	int tokenValidityThreshold;
@@ -115,11 +106,10 @@ public class PasswordReissueServiceImpl implements PasswordReissueService {
 
 		passwordReissueInfoRepository.create(info);
 
-		UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
-		uriBuilder.scheme(protocol).host(host).port(port).path(contextPath)
-				.pathSegment("reissue").pathSegment("resetpassword")
+		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(baseUrl);
+		uriBuilder.pathSegment("reissue").pathSegment("resetpassword")
 				.queryParam("form").queryParam("token", info.getToken());
-		String passwordResetUrl = uriBuilder.build().toString();
+		String passwordResetUrl = uriBuilder.build().encode().toUriString();
 
 		mailSharedService.send(account.getEmail(), passwordResetUrl);
 

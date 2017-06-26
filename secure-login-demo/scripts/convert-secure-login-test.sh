@@ -14,10 +14,6 @@ fi
 
 # selenium/pom.xml
 SELENIUM_POM=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium -type f -name 'pom.xml'`
-sed -i -e 's|</configuration>|\
-                    <argLine>-Dhttps.proxyHost=${http.proxyHost} -Dhttps.proxyPort=${http.proxyPort}</argLine>\
-                </configuration>|' "$SELENIUM_POM"
-
 sed -i -e 's|</dependencies>|\
         <dependency>\
             <groupId>org.hamcrest</groupId>\
@@ -31,32 +27,6 @@ sed -i -e 's|</dependencies>|\
             <scope>test</scope>\
         </dependency>\
     </dependencies>|' "$SELENIUM_POM"
-
-sed -i -e 's|</project>|\
-    <profiles>\
-        <profile>\
-            <id>use_jvm_param</id>\
-            <activation>\
-                <property>\
-                    <name>http.proxyHost</name>\
-                </property>\
-            </activation>\
-        </profile>\
-        <profile>\
-        <id>use_mavenplugin_param</id>\
-        <activation>\
-            <activeByDefault>true</activeByDefault>\
-        </activation>\
-        <properties>\
-            <http.proxyHost>localhost</http.proxyHost>\
-            <http.proxyPort>8080</http.proxyPort>\
-        </properties>\
-        </profile>\
-    </profiles>\
-    <properties>\
-        <project.root.basedir>${project.parent.basedir}</project.root.basedir>\
-    </properties>\
-</project>|' "$SELENIUM_POM"
 
 # selenium/-infra.properties
 SELENIUM_INFRA_PROPERTIES=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium -type f -name 'secure-login-infra.properties'`

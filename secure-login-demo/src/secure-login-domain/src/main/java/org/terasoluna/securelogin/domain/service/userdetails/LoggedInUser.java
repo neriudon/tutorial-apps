@@ -30,8 +30,7 @@ public class LoggedInUser extends User {
 	private final LocalDateTime lastLoginDate;
 
 	public LoggedInUser(Account account, boolean isLocked,
-			LocalDateTime lastLoginDate,
-			List<SimpleGrantedAuthority> authorities) {
+			LocalDateTime lastLoginDate, List<SimpleGrantedAuthority> authorities) {
 		super(account.getUsername(), account.getPassword(), true, true, true,
 				!isLocked, authorities);
 		this.account = account;
