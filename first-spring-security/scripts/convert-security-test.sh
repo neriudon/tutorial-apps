@@ -13,7 +13,7 @@ fi
 
 if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
   find ./ -type f -name 'selenium.properties' | xargs sed -i -e "s|selenium.contextName=|selenium.contextName=${ARTIFACT_ID}-web|"
-  find ./ -type f -name 'FirstSpringSecurityTest.java' | xargs sed -i -e 's|assertThat(driver.findElement(By.tagName("h1")).getText()|assertThat(driver.findElement(By.id("title")).getText()|'
+  find ./ -type f -name 'FirstSpringSecurityTest.java' | xargs sed -i -e 's|assertThat(driver.findElement(By.tagName("h1")).getText()|assertThat(driver.findElement(By.xpath("//div[@id=\\"wrapper\\"]/h1")).getText()|'
 else
   find ./ -type f -name 'selenium.properties' | xargs sed -i -e "s|selenium.contextName=|selenium.contextName=${ARTIFACT_ID}|"
 fi
