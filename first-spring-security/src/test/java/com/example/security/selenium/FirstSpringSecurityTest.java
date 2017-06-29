@@ -38,9 +38,9 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
 
         // check initial value
         {
-        	assertThat(inputFieldAccessor.getValue(By.id("username"),driver),
+        	assertThat(inputFieldAccessor.getValue(By.id("j_username"),driver),
             		is("demo"));
-            assertThat(inputFieldAccessor.getValue(By.id("password"),driver),
+            assertThat(inputFieldAccessor.getValue(By.id("j_password"),driver),
             		is("demo"));
 
         }
@@ -92,9 +92,9 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
 
         // check login screen
         {
-        	assertThat(inputFieldAccessor.getValue(By.id("username"),driver),
+        	assertThat(inputFieldAccessor.getValue(By.id("j_username"),driver),
             		is("demo"));
-            assertThat(inputFieldAccessor.getValue(By.id("password"),driver),
+            assertThat(inputFieldAccessor.getValue(By.id("j_password"),driver),
             		is("demo"));
         }
 
@@ -142,7 +142,7 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
 
         // login as an unregistered user
         {
-            inputFieldAccessor.overrideValue(By.id("username"), "aaa", driver);
+            inputFieldAccessor.overrideValue(By.id("j_username"), "aaa", driver);
             driver.findElement(By.name("submit")).click();
 
         }
@@ -152,9 +152,9 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
             assertThat(driver.findElement(By.tagName("li")).getText(),
                     is("Bad credentials"));
 
-            assertThat(inputFieldAccessor.getValue(By.id("username"),driver),
+            assertThat(inputFieldAccessor.getValue(By.id("j_username"),driver),
             		is("demo"));
-            assertThat(inputFieldAccessor.getValue(By.id("password"),driver),
+            assertThat(inputFieldAccessor.getValue(By.id("j_password"),driver),
             		is("demo"));
         }
     }

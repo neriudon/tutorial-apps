@@ -1,13 +1,13 @@
 sudo: false
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk7
 cache:
   directories:
     - $HOME/.m2
 env:
   global:
-    - ARCHETYPE_VERSION=5.4.0-SNAPSHOT
+    - ARCHETYPE_VERSION=5.0.3-SNAPSHOT
     - VERSION=1.0.0-SNAPSHOT
     - CARGO_DAEMON_WEBAPP_VERSION=1.4.17
   matrix:
@@ -26,12 +26,6 @@ env:
     # first-spring-security
     - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis3-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis3
     - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis3-multi
-    # session-tutorial-init
-    - TARGET_TUTORIAL=session-tutorial-init ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=com.example.session ARTIFACT_ID=session-tutorial-init
-    # session-tutorial-complete
-    - TARGET_TUTORIAL=session-tutorial-complete ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=com.example.session ARTIFACT_ID=session-tutorial-complete
-    # secure-login-demo
-    - TARGET_TUTORIAL=secure-login-demo ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=org.terasoluna.securelogin ARTIFACT_ID=secure-login
   
 before_script:
   - export DISPLAY=:99.0

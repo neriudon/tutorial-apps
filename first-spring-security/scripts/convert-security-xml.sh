@@ -9,19 +9,24 @@ if test -n $TARGET_DIR; then
 fi
 
 # spring-security.xml
-find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|<sec:form-login/>|\
+find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|</sec:http>|\
         <!-- (1) -->\
-        <sec:form-login login-page="/login.jsp"\
-            authentication-failure-url="/login.jsp?error=true" />\
+        <sec:form-login\
+            login-page="/login.jsp"\
+            authentication-failure-url="/login.jsp?error=true"\
+            login-processing-url="/authenticate" />\
         <!-- (2) -->\
-        <sec:logout logout-success-url="/" delete-cookies="JSESSIONID" />\
+        <sec:logout\
+            logout-url="/logout"\
+            logout-success-url="/"\
+            delete-cookies="JSESSIONID" />\
         <!-- (3) -->\
-        <sec:intercept-url pattern="/login.jsp"\
-            access="permitAll" />\
-        <sec:intercept-url pattern="/**" access="isAuthenticated()" />|'
+        <sec:intercept-url pattern="/login.jsp" access="permitAll" />\
+        <sec:intercept-url pattern="/**" access="isAuthenticated()" />\
+    </sec:http>|'
 
 # spring-security.xml
-find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|<sec:authentication-manager />|\
+find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|<sec:authentication-manager></sec:authentication-manager>|\
     <sec:authentication-manager>\
         <!-- com.example.security.domain.service.userdetails.SampleUserDetailsService \
             is scanned by component scan with @Service -->\
