@@ -14,9 +14,7 @@ fi
 
 # env/-infra.properties
 ENV_INFRA_PROPERTIES=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-env -type f -name "${ARTIFACT_ID}-infra.properties"`
-sed -i -e "s|app\.host = localhost|app.host = ${HOST_IP}|" "$ENV_INFRA_PROPERTIES"
-sed -i -e "s|app\.port = 8080|app.port = ${APSRV_WEB_PORT}|" "$ENV_INFRA_PROPERTIES"
-sed -i -e "s|app\.contextPath = /secure-login-web|app.contextPath = /${ARTIFACT_ID}-web|" "$ENV_INFRA_PROPERTIES"
+sed -i -e "s|app.applicationBaseUrl = http://localhost:8080/secure-login-web|app.applicationBaseUrl = http://${HOST_IP}:${APSRV_WEB_PORT}/${ARTIFACT_ID}-web|" "$ENV_INFRA_PROPERTIES"
 
 if test -n $TARGET_DIR; then
   popd

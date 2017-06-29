@@ -9,7 +9,7 @@
 	<div id="wrapper">
 		<h3>Login with Username and Password</h3>
 		
-		<c:if test="${param.containsKey('error')}">
+		<c:if test="${param.error}">
 			<span id="loginError">
 			<t:messagesPanel messagesType="error"
 				messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" />
@@ -29,10 +29,6 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td><input id="login" name="submit" type="submit" value="login" /></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td><a id="create" href="${f:h(pageContext.request.contextPath)}/accounts/create?form">Create new account</a></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>

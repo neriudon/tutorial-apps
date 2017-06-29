@@ -28,8 +28,7 @@ The following table describe Shell scripts functionality.
 | common/scripts/change-maven-settings.sh | Copy maven settings.xml from ``~/.m2`` directory and configure archetype repository. |
 
 ## How to execute
-You can execute ``create-app.sh`` with no parameters to genarate tutorial applications.  
-If you want to use snapshot version's archetype, previously execute ``change-maven-settings.sh``.  
+You can execute ``change-maven-settings.sh`` and then ``create-app.sh`` with no parameters to genarate tutorial applications.  
 First of all, you must set following environment variables.
 
 | Environment Variable | Description | Note |

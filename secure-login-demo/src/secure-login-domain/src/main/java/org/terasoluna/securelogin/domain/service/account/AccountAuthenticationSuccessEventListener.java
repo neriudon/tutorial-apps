@@ -24,7 +24,7 @@ import org.terasoluna.securelogin.domain.service.authenticationevent.Authenticat
 import org.terasoluna.securelogin.domain.service.userdetails.LoggedInUser;
 
 @Component
-public class AccountAuthenticationSuccessEventListener {
+public class AccountAuthenticationSuccessEventListener{
 
 	@Inject
 	AuthenticationEventSharedService authenticationEventSharedService;
@@ -34,8 +34,7 @@ public class AccountAuthenticationSuccessEventListener {
 		LoggedInUser details = (LoggedInUser) event.getAuthentication()
 				.getPrincipal();
 
-		authenticationEventSharedService.authenticationSuccess(details
-				.getUsername());
+		authenticationEventSharedService.authenticationSuccess(details.getUsername());
 	}
 
 }
