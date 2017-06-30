@@ -24,8 +24,8 @@ env:
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-jpa-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-jpa
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-jpa-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-jpa-multi
     # first-spring-security
-    - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis3-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis3
-    - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis3-multi
+    - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis2-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis2
+    - TARGET_TUTORIAL=first-spring-security ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis2-archetype GROUP_ID=com.example.security ARTIFACT_ID=first-spring-security-mybatis2-multi
   
 before_script:
   - export DISPLAY=:99.0

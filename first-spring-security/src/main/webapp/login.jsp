@@ -9,15 +9,13 @@
     <div id="wrapper">
         <h3>Login with Username and Password</h3>
 
-        <!-- (1) -->
-        <c:if test="${param.error}">
-            <!-- (2) -->
+        <c:if test="${param.error}"><!-- (1) -->
             <t:messagesPanel messagesType="error"
-                messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" />
+                messagesAttributeName="SPRING_SECURITY_LAST_EXCEPTION" /><!-- (2) -->
         </c:if>
 
-        <!-- (3) -->
-        <form:form action="${pageContext.request.contextPath}/authenticate">
+        <form action="${pageContext.request.contextPath}/authenticate"
+            method="POST"><!-- (3) -->
             <table>
                 <tr>
                     <td><label for="j_username">User:</label></td>
@@ -31,10 +29,13 @@
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
-                    <td><input name="submit" type="submit" value="Login" /></td>
+                    <td><input type="hidden"
+                        name="${f:h(_csrf.parameterName)}"
+                        value="${f:h(_csrf.token)}" /> <input
+                        name="submit" type="submit" value="Login" /></td><!-- (6) -->
                 </tr>
             </table>
-        </form:form>
+        </form>
     </div>
 </body>
 </html>

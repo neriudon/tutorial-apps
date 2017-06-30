@@ -21,27 +21,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
 import com.example.security.domain.model.Account;
 import com.example.security.domain.service.account.AccountSharedService;
 
 @Service
-public class SampleUserDetailsService implements UserDetailsService { // (1)
+public class SampleUserDetailsService implements UserDetailsService {
     @Inject
-    AccountSharedService accountSharedService; // (2)
+    AccountSharedService accountSharedService; // (1)
 
-    @Transactional(readOnly=true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            Account account = accountSharedService.findOne(username); // (3)
-            return new SampleUserDetails(account); // (4)
+            Account account = accountSharedService.findOne(username); // (2)
+            return new SampleUserDetails(account); // (3)
         } catch (ResourceNotFoundException e) {
-            throw new UsernameNotFoundException("user not found", e); // (5)
+            throw new UsernameNotFoundException("user not found", e); // (4)
         }
     }
 
 }
-

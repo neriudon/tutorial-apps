@@ -65,8 +65,7 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
             assertThat(driver.findElement(By.tagName("h1")).getText(),
                     is("Hello world!"));
 
-            List<WebElement> cheese = driver.findElements(By.tagName("p"));
-            assertThat(cheese.get(1).getText(), is("Welcome Taro Yamada !!"));
+            assertThat(driver.findElement(By.tagName("p")).getText(), is("Welcome Taro Yamada"));
             assertThat(
             		driver.findElement(By.xpath("//a[@href='/"
                             + contextName + "/account']")).getText(), is("view account"));
@@ -87,7 +86,8 @@ public class FirstSpringSecurityTest extends FunctionTestSupport {
 
         // click logout button
         {
-        	driver.findElement(By.tagName("button")).click();
+        	driver.findElement(By.xpath("//a[@href='/" + contextName
+                    + "/logout']")).click();
         }
 
         // check login screen
