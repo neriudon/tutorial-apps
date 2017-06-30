@@ -19,8 +19,8 @@ env:
     - TARGET_TUTORIAL=todo ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-jpa-archetype GROUP_ID=todo ARTIFACT_ID=todo-jpa-multi
     # todo-rest
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-archetype GROUP_ID=todo ARTIFACT_ID=todo-api
-    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis3-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-mybatis3
-    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-mybatis3-multi
+    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis2-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-mybatis2
+    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis2-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-mybatis2-multi
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-jpa-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-jpa
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-jpa-archetype GROUP_ID=todo ARTIFACT_ID=todo-api-jpa-multi
     # first-spring-security

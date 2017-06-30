@@ -15,24 +15,22 @@
  */
 package todo.api.common.error;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-public class ApiError implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class ApiError {
 
     private final String code;
 
     private final String message;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(include = Inclusion.NON_EMPTY)
     private final String target;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(include = Inclusion.NON_EMPTY)
     private final List<ApiError> details = new ArrayList<>();
 
     public ApiError(String code, String message) {
@@ -66,4 +64,3 @@ public class ApiError implements Serializable {
     }
 
 }
-

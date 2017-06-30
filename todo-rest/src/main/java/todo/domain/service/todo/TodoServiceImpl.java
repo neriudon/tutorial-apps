@@ -33,11 +33,10 @@ import todo.domain.repository.todo.TodoRepository;
 @Service
 @Transactional
 public class TodoServiceImpl implements TodoService {
-
-    private static final long MAX_UNFINISHED_COUNT = 5;
-
     @Inject
     TodoRepository todoRepository;
+
+    private static final long MAX_UNFINISHED_COUNT = 5;
 
     @Override
     @Transactional(readOnly = true)
@@ -73,7 +72,7 @@ public class TodoServiceImpl implements TodoService {
         todo.setCreatedAt(createdAt);
         todo.setFinished(false);
 
-        todoRepository.create(todo);
+        todoRepository.save(todo);
 
         return todo;
     }
@@ -87,7 +86,7 @@ public class TodoServiceImpl implements TodoService {
             throw new BusinessException(messages);
         }
         todo.setFinished(true);
-        todoRepository.update(todo);
+        todoRepository.save(todo);
         return todo;
     }
 
