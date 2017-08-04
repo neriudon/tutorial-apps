@@ -23,27 +23,28 @@ import javax.inject.Inject;
 
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import todo.domain.model.Todo;
 import todo.domain.service.todo.TodoService;
 
-@RestController
+@Controller
 @RequestMapping("todos")
 public class TodoRestController {
-
     @Inject
     TodoService todoService;
     @Inject
     Mapper beanMapper;
 
     @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public List<TodoResource> getTodos() {
         Collection<Todo> todos = todoService.findAll();
@@ -55,6 +56,7 @@ public class TodoRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public TodoResource postTodos(@RequestBody @Validated TodoResource todoResource) {
         Todo createdTodo = todoService.create(beanMapper.map(todoResource, Todo.class));
@@ -63,6 +65,7 @@ public class TodoRestController {
     }
 
     @RequestMapping(value="{todoId}", method = RequestMethod.GET)
+    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public TodoResource getTodo(@PathVariable("todoId") String todoId) {
         Todo todo = todoService.findOne(todoId);
@@ -71,6 +74,7 @@ public class TodoRestController {
     }
 
     @RequestMapping(value="{todoId}", method = RequestMethod.PUT)
+    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public TodoResource putTodo(@PathVariable("todoId") String todoId) {
         Todo finishedTodo = todoService.finish(todoId);
@@ -79,10 +83,10 @@ public class TodoRestController {
     }
 
     @RequestMapping(value="{todoId}", method = RequestMethod.DELETE) // (1)
+    @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT) // (2)
     public void deleteTodo(@PathVariable("todoId") String todoId) { // (3)
         todoService.delete(todoId); // (4)
     }
 
 }
-

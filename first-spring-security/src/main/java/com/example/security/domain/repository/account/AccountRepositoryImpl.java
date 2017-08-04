@@ -13,20 +13,26 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package todo.domain.service.todo;
+package com.example.security.domain.repository.account;
 
-import java.util.Collection;
+import javax.inject.Inject;
 
-import todo.domain.model.Todo;
+import org.springframework.stereotype.Repository;
 
-public interface TodoService {
-    Collection<Todo> findAll();
+import jp.terasoluna.fw.dao.QueryDAO;
 
-    Todo findOne(String todoId);
+import com.example.security.domain.model.Account;
 
-    Todo create(Todo todo);
+@Repository
+public class AccountRepositoryImpl implements AccountRepository {
+    @Inject
+    QueryDAO queryDAO;
 
-    Todo finish(String todoId);
+    @Override
+    public Account findOne(String username) {
+        Account account = queryDAO.executeForObject("account.findOne",
+                username, Account.class);
+        return account;
+    }
 
-    void delete(String todoId);
 }

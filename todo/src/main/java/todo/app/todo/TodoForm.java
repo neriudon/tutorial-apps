@@ -27,13 +27,11 @@ public class TodoForm implements Serializable {
     public static interface TodoFinish {
     };
 
-    // (1)
     public static interface TodoDelete {
     }
 
     private static final long serialVersionUID = 1L;
 
-    // (2)
     @NotNull(groups = { TodoFinish.class, TodoDelete.class })
     private String todoId;
 
@@ -58,4 +56,3 @@ public class TodoForm implements Serializable {
     }
 
 }
-

@@ -16,7 +16,7 @@ if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
   cp -p -r ../src/main/webapp ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main
   # domain project
   cp -p -r ../src/main/java/com/example/security/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/security
-  cp -p -r ../src/main/resources/com ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/resources
+  cp -p -r ../src/main/resources/META-INF/mybatis ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/resources/META-INF
   # env project
   cp -p -r ../src/main/resources/database ./${ARTIFACT_ID}/${ARTIFACT_ID}-env/src/main/resources
   # selenium project

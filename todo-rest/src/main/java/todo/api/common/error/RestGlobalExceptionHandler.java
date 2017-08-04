@@ -48,7 +48,7 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
         if (body == null) {
             responseBody = createApiError(request, "E999", ex.getMessage());
         }
-        return ResponseEntity.status(status).headers(headers).body(responseBody);
+        return new ResponseEntity<Object>(responseBody, headers, status);
     }
 
     private ApiError createApiError(WebRequest request, String errorCode,
@@ -83,7 +83,7 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handleBusinessException(BusinessException ex,
             WebRequest request) {
-        return handleResultMessagesNotificationException(ex, new HttpHeaders(),
+        return handleResultMessagesNotificationException(ex, null,
                 HttpStatus.CONFLICT, request);
     }
 
@@ -99,7 +99,7 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(
             ResourceNotFoundException ex, WebRequest request) {
-        return handleResultMessagesNotificationException(ex, new HttpHeaders(),
+        return handleResultMessagesNotificationException(ex, null,
                 HttpStatus.NOT_FOUND, request);
     }
 
@@ -107,9 +107,8 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleSystemError(Exception ex,
             WebRequest request) {
         ApiError apiError = createApiError(request, "E500");
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(),
+        return handleExceptionInternal(ex, apiError, null,
                 HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
 }
-

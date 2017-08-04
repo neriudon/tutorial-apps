@@ -22,8 +22,6 @@ bash ../scripts/copy-sources.sh
 
 bash ../../common/scripts/convert-common-infra.sh `pwd`
 
-bash ../../common/scripts/convert-common-css.sh `pwd`
-
 bash ../scripts/convert-security-jsp.sh `pwd`
 
 bash ../scripts/convert-security-xml.sh `pwd`

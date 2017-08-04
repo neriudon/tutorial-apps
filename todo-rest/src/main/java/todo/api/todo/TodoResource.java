@@ -15,15 +15,12 @@
  */
 package todo.api.todo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class TodoResource implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class TodoResource {
 
     private String todoId;
 
@@ -67,4 +64,3 @@ public class TodoResource implements Serializable {
         this.createdAt = createdAt;
     }
 }
-

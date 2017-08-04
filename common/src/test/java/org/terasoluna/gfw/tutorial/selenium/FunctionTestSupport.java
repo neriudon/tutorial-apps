@@ -26,9 +26,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
-import org.junit.rules.TestWatcher;
+import org.junit.rules.TestWatchman;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
+import org.junit.runners.model.FrameworkMethod;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,21 +74,21 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     public TestName testName = new TestName();
 
     @Rule
-    public TestWatcher testWatcher = new TestWatcher() {
+    public final TestWatchman testWatchmanForFailed = new TestWatchman() {
         @Override
-        protected void succeeded(Description description) {
+        public void succeeded(FrameworkMethod method) {
             onSucceeded();
             succeededEvidence();
         }
 
         @Override
-        protected void failed(Throwable e, Description description) {
+        public void failed(Throwable e, FrameworkMethod method) {
             onFailed(e);
             failedEvidence();
         }
 
         @Override
-        protected void finished(Description description) {
+        public void finished(FrameworkMethod method) {
             onFinished();
         }
     };
