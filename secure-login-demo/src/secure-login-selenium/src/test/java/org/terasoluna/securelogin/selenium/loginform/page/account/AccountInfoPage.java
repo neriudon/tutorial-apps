@@ -22,21 +22,20 @@ import org.terasoluna.securelogin.selenium.loginform.page.passwordchange.Passwor
 import static org.openqa.selenium.By.id;
 
 public class AccountInfoPage extends AuthenticationRequiredPage {
-	
-	{
-		url = "/account";
-	}
-	
-	public AccountInfoPage(WebDriverOperations webDriverOperations,
-			String applicationContextURL) {
-		super(webDriverOperations, applicationContextURL);
-	}
 
-	public PasswordChangePage goToPasswordChangePage() {
-		webDriverOperations.click(id("changePassword"));
-		waitDefaultInterval();
-		return new PasswordChangePage(webDriverOperations,
-				applicationContextUrl);
-	}
+    {
+        url = "/account";
+    }
+
+    public AccountInfoPage(WebDriverOperations webDriverOperations,
+            String applicationContextURL) {
+        super(webDriverOperations, applicationContextURL);
+    }
+
+    public PasswordChangePage goToPasswordChangePage() {
+        webDriverOperations.click(id("changePassword"));
+        waitDefaultInterval();
+        return new PasswordChangePage(webDriverOperations, applicationContextUrl);
+    }
 
 }
