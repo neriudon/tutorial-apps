@@ -39,11 +39,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:META-INF/spring/seleniumContext.xml" })
+@ContextConfiguration(locations = {
+        "classpath:META-INF/spring/seleniumContext.xml" })
 public class FunctionTestSupport extends ApplicationObjectSupport {
 
-    private static final Logger classLogger = LoggerFactory
-            .getLogger(FunctionTestSupport.class);
+    private static final Logger classLogger = LoggerFactory.getLogger(
+            FunctionTestSupport.class);
 
     protected static WebDriver driver;
 
@@ -69,7 +70,6 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     @Inject
     protected PageSource pageSource;
 
-    
     @Rule
     public TestName testName = new TestName();
 
@@ -109,8 +109,8 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     @Value("${selenium.webDriverInputFieldAccessor:JAVASCRIPT}")
     public void setWebDriverInputFieldAccessor(
             String webDriverInputFieldAccessor) {
-        this.inputFieldAccessor = WebDriverInputFieldAccessor
-                .valueOf(webDriverInputFieldAccessor.toUpperCase());
+        this.inputFieldAccessor = WebDriverInputFieldAccessor.valueOf(
+                webDriverInputFieldAccessor.toUpperCase());
     }
 
     @AfterClass
@@ -127,8 +127,8 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
         File evidenceSavingDirectory = new File(String.format("%s/%s/%s",
                 evidenceBaseDirectory, simplePackageName, testCaseName));
 
-        logger.debug("evidenceSavingDirectory is "
-                + evidenceSavingDirectory.getAbsolutePath());
+        logger.debug("evidenceSavingDirectory is " + evidenceSavingDirectory
+                .getAbsolutePath());
 
         screenCapture.setUp(evidenceSavingDirectory);
         pageSource.setUp(evidenceSavingDirectory);
@@ -145,7 +145,7 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     @Before
     public final void setUpDBLog() {
     }
-    
+
     protected void bindWebDriver(WebDriver webDriver) {
         webDrivers.add(webDriver);
     }
@@ -161,10 +161,10 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
         driver.manage().timeouts().implicitlyWait(
                 defaultTimeoutSecForImplicitlyWait, TimeUnit.SECONDS);
         driver.get(getPackageRootUrl());
-        
+
         this.webDriverOperations = new WebDriverOperations(driver, inputFieldAccessor, screenCapture);
-        this.webDriverOperations
-                .setDefaultTimeoutForImplicitlyWait(defaultTimeoutSecForImplicitlyWait);
+        this.webDriverOperations.setDefaultTimeoutForImplicitlyWait(
+                defaultTimeoutSecForImplicitlyWait);
     }
 
     private WebDriver newWebDriver() {
