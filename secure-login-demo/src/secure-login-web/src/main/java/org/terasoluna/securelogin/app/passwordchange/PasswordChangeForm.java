@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import org.terasoluna.securelogin.app.common.validation.Confirm;
+import org.terasoluna.gfw.common.validator.constraints.Compare;
 import org.terasoluna.securelogin.app.common.validation.NotReusedPassword;
 import org.terasoluna.securelogin.app.common.validation.StrongPassword;
 import org.terasoluna.securelogin.app.common.validation.ConfirmOldPassword;
@@ -27,7 +27,7 @@ import org.terasoluna.securelogin.app.common.validation.ConfirmOldPassword;
 import lombok.Data;
 
 @Data
-@Confirm(propertyName = "newPassword")
+@Compare(left = "newPassword", right = "confirmNewPassword", operator = Compare.Operator.EQUAL)
 @StrongPassword(usernamePropertyName = "username", newPasswordPropertyName = "newPassword")
 @NotReusedPassword(usernamePropertyName = "username", newPasswordPropertyName = "newPassword")
 @ConfirmOldPassword(usernamePropertyName = "username", oldPasswordPropertyName = "oldPassword")
