@@ -99,6 +99,11 @@ sed -i -e 's|spring-beans\.xsd|spring-beans\.xsd\
 WEB_POM=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-web -type f -name 'pom.xml'`
 sed -i -e 's|</dependencies>|\
         <dependency>\
+            <groupId>org.terasoluna.gfw</groupId>\
+            <artifactId>terasoluna-gfw-validator</artifactId>\
+        </dependency>\
+\
+        <dependency>\
             <groupId>org.projectlombok</groupId>\
             <artifactId>lombok</artifactId>\
             <scope>provided</scope>\
