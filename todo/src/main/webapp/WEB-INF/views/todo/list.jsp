@@ -9,6 +9,10 @@
     text-decoration: line-through;
 }
 
+.inline {
+    display: inline-block;
+}
+
 .alert {
     border: 1px solid;
 }
@@ -57,7 +61,7 @@
                                 action="${pageContext.request.contextPath}/todo/finish"
                                 method="post"
                                 modelAttribute="todoForm"
-                                cssStyle="display: inline-block;">
+                                cssClass="inline">
                                 <form:hidden path="todoId"
                                     value="${f:h(todo.todoId)}" />
                                 <input type="submit" name="finish"
@@ -68,7 +72,7 @@
                     <form:form
                         action="${pageContext.request.contextPath}/todo/delete"
                         method="post" modelAttribute="todoForm"
-                        cssStyle="display: inline-block;">
+                        cssClass="inline">
                         <form:hidden path="todoId"
                             value="${f:h(todo.todoId)}" />
                         <input type="submit" value="Delete" />
