@@ -11,15 +11,15 @@ fi
 # spring-security.xml
 find ./ -type f -name 'spring-security.xml' | xargs sed -i -e 's|<sec:http auto-config="true" use-expressions="true">|\
     <sec:http auto-config="true" use-expressions="true">\
-        <sec:form-login login-page="/login.jsp"\
-             authentication-failure-url="/login.jsp?error=true"\
+        <sec:form-login login-page="/login/loginForm"\
+             authentication-failure-url="/login/loginForm?error=true"\
              login-processing-url="/authenticate" /><!-- (1) -->\
-         <sec:logout logout-url="/logout" logout-success-url="/"\
+        <sec:logout logout-url="/logout" logout-success-url="/"\
              delete-cookies="JSESSIONID" /><!-- (2) -->\
 \
-         <sec:intercept-url pattern="/login.jsp"\
+        <sec:intercept-url pattern="/login/**"\
              access="permitAll" /><!-- (3) -->\
-         <sec:intercept-url pattern="/**" access="isAuthenticated()" /><!-- (4) -->\
+        <sec:intercept-url pattern="/**" access="isAuthenticated()" /><!-- (4) -->\
 |'
 
 # spring-security.xml
