@@ -22,6 +22,8 @@ bash ../scripts/copy-sources.sh
 
 bash ../scripts/convert-todo-test.sh `pwd`
 
-bash ../../common/scripts/convert-common-infra.sh `pwd`
+if [ "$ARCHETYPE_ARTIFACT_ID" != "terasoluna-gfw-web-blank-archetype" ]; then
+    bash ../../common/scripts/convert-common-infra.sh `pwd`
+fi
 
 popd
