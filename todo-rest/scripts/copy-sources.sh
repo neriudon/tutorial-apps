@@ -10,25 +10,25 @@ pushd "${SCRIPT_DIR}/../target-project"
 if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
   # multi project
   # web project
-  cp -p -r ../../todo/src/main/java/todo/app ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main/java/todo
+  cp -p -r ../../todo/src/main/java/com/example/todo/app ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main/java/com/example/todo
   cp -p -r ../../todo/src/main/webapp ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main
-  cp -p -r ../src/main/java/todo/api ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main/java/todo
+  cp -p -r ../src/main/java/com/example/todo/api ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main/java/com/example/todo
   # domain project
-  cp -p -r ../src/main/java/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/todo
+  cp -p -r ../src/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
   # selenium project
   cp -p -r ../src/test ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium/src
   cp -p -r ../../common/src/test ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium/src
   
   case "${ARCHETYPE_ARTIFACT_ID}" in
     *mybatis2* )
-      cp -p -r ../../todo/src-mybatis2/main/java/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/todo
+      cp -p -r ../../todo/src-mybatis2/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
       cp -p -r ../../todo/src-mybatis2/main/resources/META-INF/mybatis ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/resources/META-INF
       ;;
     *jpa* )
-      cp -p -r ../../todo/src-jpa/main/java/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/todo
+      cp -p -r ../../todo/src-jpa/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
       ;;
     * )
-      cp -p -r ../../todo/src-plain/main/java/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/todo
+      cp -p -r ../../todo/src-plain/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
       ;;
   esac
 else
@@ -38,14 +38,14 @@ else
   
   case "${ARCHETYPE_ARTIFACT_ID}" in
     *mybatis2* )
-      cp -p -r ../../todo/src-mybatis2/main/java/todo/domain ./${ARTIFACT_ID}/src/main/java/todo
+      cp -p -r ../../todo/src-mybatis2/main/java/com/example/todo/domain ./${ARTIFACT_ID}/src/main/java/com/example/todo
       cp -p -r ../../todo/src-mybatis2/main/resources/META-INF/mybatis ./${ARTIFACT_ID}/src/main/resources/META-INF
       ;;
     *jpa* )
-      cp -p -r ../../todo/src-jpa/main/java/todo/domain ./${ARTIFACT_ID}/src/main/java/todo
+      cp -p -r ../../todo/src-jpa/main/java/com/example/todo/domain ./${ARTIFACT_ID}/src/main/java/com/example/todo
       ;;
     * )
-      cp -p -r ../../todo/src-plain/main/java/todo/domain ./${ARTIFACT_ID}/src/main/java/todo
+      cp -p -r ../../todo/src-plain/main/java/com/example/todo/domain ./${ARTIFACT_ID}/src/main/java/com/example/todo
       ;;
   esac
 fi
