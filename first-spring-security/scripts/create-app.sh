@@ -20,8 +20,6 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-bash ../../common/scripts/convert-common-infra.sh `pwd`
-
 bash ../scripts/convert-security-jsp.sh `pwd`
 
 bash ../scripts/convert-security-xml.sh `pwd`
