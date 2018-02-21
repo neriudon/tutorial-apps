@@ -22,8 +22,9 @@ bash ../scripts/copy-sources.sh
 
 bash ../scripts/convert-todo-test.sh `pwd`
 
-if [ "$ARCHETYPE_ARTIFACT_ID" != "terasoluna-gfw-web-blank-archetype" ]; then
-    bash ../scripts/convert-todo-infra.sh `pwd`
-fi
+case "$ARCHETYPE_ARTIFACT_ID" in
+    *mybatis3* | *jpa* ) bash ../scripts/convert-todo-infra.sh `pwd` ;;
+    * ) ;;
+esac
 
 popd
