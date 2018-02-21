@@ -3,7 +3,7 @@
             PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
             "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="todo">
-    <resultMap id="todo" class="todo.domain.model.Todo">
+    <resultMap id="todo" class="com.example.todo.domain.model.Todo">
         <result property="todoId" column="todo_id" />
         <result property="todoTitle" column="todo_title" />
         <result property="finished" column="finished" />
@@ -37,7 +37,7 @@
     ]]>
     </select>
 
-    <insert id="create" parameterClass="todo.domain.model.Todo">
+    <insert id="create" parameterClass="com.example.todo.domain.model.Todo">
     <![CDATA[
         INSERT INTO todo
         (
@@ -56,7 +56,7 @@
     ]]>
     </insert>
 
-    <update id="update" parameterClass="todo.domain.model.Todo">
+    <update id="update" parameterClass="com.example.todo.domain.model.Todo">
     <![CDATA[
         UPDATE todo
         SET
@@ -68,7 +68,7 @@
     ]]>
     </update>
 
-    <delete id="delete" parameterClass="todo.domain.model.Todo">
+    <delete id="delete" parameterClass="com.example.todo.domain.model.Todo">
     <![CDATA[
         DELETE FROM
             todo

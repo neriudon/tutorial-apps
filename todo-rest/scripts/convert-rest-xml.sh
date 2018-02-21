@@ -59,8 +59,8 @@ find ./ -type f -name 'spring-mvc-rest.xml' | xargs sed -i -e 's|</mvc:annotatio
 |'
 
 # spring-mvc-rest.xml
-find ./ -type f -name 'spring-mvc-rest.xml' | xargs sed -i -e 's|<context:component-scan base-package="todo.app" />|\
-    <context:component-scan base-package="todo.api" />|'
+find ./ -type f -name 'spring-mvc-rest.xml' | xargs sed -i -e 's|<context:component-scan base-package="com.example.todo.app" />|\
+    <context:component-scan base-package="com.example.todo.api" />|'
 
 # spring-mvc-rest.xml
 if test `echo $ARCHETYPE_ARTIFACT_ID | grep jpa`;then
