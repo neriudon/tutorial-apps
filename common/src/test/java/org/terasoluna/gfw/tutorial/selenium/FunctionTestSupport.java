@@ -194,6 +194,7 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
             driver = new FirefoxDriver(profile);
         }
 
+        webDrivers.add(driver);
         return driver;
     }
 
