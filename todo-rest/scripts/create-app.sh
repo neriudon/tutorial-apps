@@ -24,6 +24,8 @@ bash ../scripts/convert-rest-test.sh `pwd`
 
 bash ../../common/scripts/convert-common-infra.sh `pwd`
 
+bash ../scripts/convert-rest-java.sh `pwd`
+
 bash ../scripts/convert-rest-msg.sh `pwd`
 
 bash ../scripts/convert-rest-xml.sh `pwd`
