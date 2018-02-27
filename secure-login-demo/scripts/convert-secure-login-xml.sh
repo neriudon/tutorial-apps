@@ -50,11 +50,11 @@ sed -i -e 's|</dependencies>|\
 # mybatis-config.xml
 MYBATIS_CONFIG=`find ./ -type f -name 'mybatis-config.xml'`
 sed -i -e 's|</typeAliases>|\
-        <package name="org.terasoluna.securelogin.infra.mybatis.typehandler" />\
+        <package name="com.example.securelogin.infra.mybatis.typehandler" />\
     </typeAliases>|' "$MYBATIS_CONFIG"
 
 sed -i -e 's|</typeHandlers>|\
-        <package name="org.terasoluna.securelogin.infra.mybatis.typehandler" />\
+        <package name="com.example.securelogin.infra.mybatis.typehandler" />\
     </typeHandlers>|' "$MYBATIS_CONFIG"
 
 # -env.xml
@@ -166,7 +166,7 @@ sed -i -e 's|</beans>|\
     <bean id="usernameRule" class="org.passay.UsernameRule" />\
 \
     <bean id="encodedPasswordHistoryRule"\
-        class="org.terasoluna.securelogin.app.common.validation.rule.EncodedPasswordHistoryRule">\
+        class="com.example.securelogin.app.common.validation.rule.EncodedPasswordHistoryRule">\
         <constructor-arg name="passwordEncoder" ref="passwordEncoder" />\
     </bean>\
 \
@@ -197,7 +197,7 @@ sed -i -e 's|</beans>|\
     </util:list>\
 \
     <bean id="expiredReissueInfoCleaner"\
-        class="org.terasoluna.securelogin.domain.common.scheduled.UnnecessaryReissueInfoCleaner" />\
+        class="com.example.securelogin.domain.common.scheduled.UnnecessaryReissueInfoCleaner" />\
     <task:scheduler id="reissueInfoCleanupTaskScheduler" />\
 \
     <task:scheduled-tasks scheduler="reissueInfoCleanupTaskScheduler">\
@@ -234,7 +234,7 @@ sed -i -e 's|</mvc:interceptors>|\
             <mvc:exclude-mapping path="/resources/**" />\
             <mvc:exclude-mapping path="/**/*.html" />\
             <bean\
-                class="org.terasoluna.securelogin.app.common.interceptor.PasswordExpirationCheckInterceptor" />\
+                class="com.example.securelogin.app.common.interceptor.PasswordExpirationCheckInterceptor" />\
         </mvc:interceptor>\
     </mvc:interceptors>|' "$SPRING_MVC"
 
@@ -242,7 +242,7 @@ sed -i -e 's|</mvc:interceptors>|\
 SPRING_SECURITY=`find ./ -type f -name 'spring-security.xml'`
 sed -i -e 's|</beans>|\
     <bean id="logoutSuccessHandler"\
-        class="org.terasoluna.securelogin.app.common.security.CacheClearLogoutSuccessHandler">\
+        class="com.example.securelogin.app.common.security.CacheClearLogoutSuccessHandler">\
         <constructor-arg value="/" />\
     </bean>\
 </beans>|' "$SPRING_SECURITY"
