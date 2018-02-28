@@ -12,21 +12,17 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
     ">
 
-    <!-- (1) -->
     <context:property-placeholder
         location="classpath*:/META-INF/spring/*.properties" />
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">
-            <!-- (2) -->
             <bean
-                class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <!-- (3) -->
+                class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
                 <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                    <bean class="org.codehaus.jackson.map.ObjectMapper">
                         <property name="dateFormat">
-                            <!-- (4) -->
-                            <bean class="com.fasterxml.jackson.databind.util.StdDateFormat"/>
+                            <bean class="org.codehaus.jackson.map.util.StdDateFormat"/>
                         </property>
                     </bean>
                 </property>
@@ -34,9 +30,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.example.todo.api" /> <!-- (5) -->
+    <context:component-scan base-package="com.example.todo.api" />
 
-    <!-- (6) -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
@@ -47,7 +42,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- (7) -->
     <!-- Setting AOP. -->
     <bean id="handlerExceptionResolverLoggingInterceptor"
         class="org.terasoluna.gfw.web.exception.HandlerExceptionResolverLoggingInterceptor">
