@@ -23,7 +23,7 @@ bash ../scripts/copy-sources.sh
 bash ../scripts/convert-rest-test.sh `pwd`
 
 case "$ARCHETYPE_ARTIFACT_ID" in
-    *mybatis3* | *jpa* ) bash ../../todo/scripts/convert-todo-infra.sh `pwd` ;;
+    *mybatis2* | *jpa* ) bash ../../todo/scripts/convert-todo-infra.sh `pwd` ;;
     * ) ;;
 esac
 
