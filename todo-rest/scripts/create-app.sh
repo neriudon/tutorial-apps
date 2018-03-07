@@ -27,6 +27,8 @@ case "$ARCHETYPE_ARTIFACT_ID" in
     * ) ;;
 esac
 
+bash ../scripts/convert-rest-java.sh `pwd`
+
 bash ../scripts/convert-rest-msg.sh `pwd`
 
 bash ../scripts/convert-rest-xml.sh `pwd`

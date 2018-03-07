@@ -15,7 +15,7 @@ if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
   cp -p -r ../src/main/java/com/example/todo/api ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main/java/com/example/todo
   cp -p -r ../src/main/resources ./${ARTIFACT_ID}/${ARTIFACT_ID}-web/src/main
   # domain project
-  cp -p -r ../src/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
+  cp -p -r ../../todo/src/main/java/com/example/todo/domain ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain/src/main/java/com/example/todo
   # selenium project
   cp -p -r ../src/test ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium/src
   cp -p -r ../../common/src/test ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium/src
@@ -34,6 +34,8 @@ if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
   esac
 else
   # single project
+  cp -p -r ../../todo/src/main/java/com/example/todo ./${ARTIFACT_ID}/src/main/java/com/example
+  cp -p -r ../../todo/src/main/webapp ./${ARTIFACT_ID}/src/main
   cp -p -r ../src/* ./${ARTIFACT_ID}/src
   cp -p -r ../../common/src/test ./${ARTIFACT_ID}/src
   
