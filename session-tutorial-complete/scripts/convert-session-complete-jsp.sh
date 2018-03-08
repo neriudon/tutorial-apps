@@ -3,9 +3,9 @@
 # Parameters:
 #   $1 : (Optional) Target project path to convert.
 
-TARGET_DIR=$1
-if test -n $TARGET_DIR; then
-  pushd "$TARGET_DIR"
+APPLICATION_DIR=$1
+if test -n $APPLICATION_DIR; then
+  pushd "$APPLICATION_DIR"
 fi
 
 ###################  init  ###################
@@ -105,6 +105,6 @@ find ./ -type f -name 'showGoodsDetail.jsp' | xargs sed -i -e 's|</body>|    <di
     </div>\
 </body>|'
 
-if test -n $TARGET_DIR; then
+if test -n $APPLICATION_DIR; then
   popd
 fi
