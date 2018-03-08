@@ -36,20 +36,16 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-pushd "$ARTIFACT_ID"
+bash ../scripts/convert-secure-login-xml.sh `pwd`
 
-bash ../../scripts/convert-secure-login-xml.sh `pwd`
+bash ../scripts/convert-secure-login-jsp.sh `pwd`
 
-bash ../../scripts/convert-secure-login-jsp.sh `pwd`
+bash ../scripts/convert-secure-login-infra.sh `pwd`
 
-bash ../../scripts/convert-secure-login-infra.sh `pwd`
+bash ../scripts/convert-secure-login-properties.sh `pwd`
 
-bash ../../scripts/convert-secure-login-properties.sh `pwd`
+bash ../scripts/convert-secure-login-css.sh `pwd`
 
-bash ../../scripts/convert-secure-login-css.sh `pwd`
-
-bash ../../scripts/convert-secure-login-test.sh `pwd`
-
-popd
+bash ../scripts/convert-secure-login-test.sh `pwd`
 
 popd
