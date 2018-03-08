@@ -13,7 +13,7 @@ SCRIPT_DIR=`dirname "$0"`
 TARGET_DIR=${SCRIPT_DIR}/../target-project
 
 # create dir for work
-rm -rf "$TARGET_DIR"
+rm -rf "${TARGET_DIR}/${ARTIFACT_ID}"
 mkdir "$TARGET_DIR"
 pushd "$TARGET_DIR"
 
@@ -21,19 +21,23 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-bash ../scripts/convert-rest-test.sh `pwd`
+pushd "$ARTIFACT_ID"
+
+bash ../../scripts/convert-rest-test.sh `pwd`
 
 case "$ARCHETYPE_ARTIFACT_ID" in
-    *mybatis3* | *jpa* ) bash ../../todo/scripts/convert-todo-infra.sh `pwd` ;;
+    *mybatis3* | *jpa* ) bash ../../../todo/scripts/convert-todo-infra.sh `pwd` ;;
     * ) ;;
 esac
 
-bash ../../todo/scripts/convert-todo-css.sh `pwd`
+bash ../../../todo/scripts/convert-todo-css.sh `pwd`
 
-bash ../scripts/convert-rest-java.sh `pwd`
+bash ../../scripts/convert-rest-java.sh `pwd`
 
-bash ../scripts/convert-rest-msg.sh `pwd`
+bash ../../scripts/convert-rest-msg.sh `pwd`
 
-bash ../scripts/convert-rest-xml.sh `pwd`
+bash ../../scripts/convert-rest-xml.sh `pwd`
+
+popd
 
 popd

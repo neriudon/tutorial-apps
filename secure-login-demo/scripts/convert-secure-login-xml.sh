@@ -4,13 +4,13 @@
 # Parameters:
 #   $1 : (Optional) Target project path to convert.
 
-TARGET_DIR=$1
-if test -n $TARGET_DIR; then
-  pushd "$TARGET_DIR"
+APPLICATION_DIR=$1
+if test -n $APPLICATION_DIR; then
+  pushd "$APPLICATION_DIR"
 fi
 
 # domain/pom.xml
-DOMAIN_POM=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-domain -type f -name 'pom.xml'`
+DOMAIN_POM=`find ./${ARTIFACT_ID}-domain -type f -name 'pom.xml'`
 sed -i -e 's|</dependencies>|\
         <dependency>\
             <groupId>org.springframework</groupId>\
@@ -96,7 +96,7 @@ sed -i -e 's|spring-beans\.xsd|spring-beans\.xsd\
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd|' "$SECURE_LOGIN_ENV"
 
 # web/pom.xml
-WEB_POM=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-web -type f -name 'pom.xml'`
+WEB_POM=`find ./${ARTIFACT_ID}-web -type f -name 'pom.xml'`
 sed -i -e 's|</dependencies>|\
         <dependency>\
             <groupId>org.terasoluna.gfw</groupId>\
@@ -313,6 +313,6 @@ sed -i -e "${LISTENER_LINE}i\
         <url-pattern>/admin/h2/*</url-pattern>\
     </servlet-mapping>" "$WEB_XML"
 
-if test -n $TARGET_DIR; then
+if test -n $APPLICATION_DIR; then
   popd
 fi
