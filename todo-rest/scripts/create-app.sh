@@ -21,23 +21,19 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-pushd "$ARTIFACT_ID"
-
-bash ../../scripts/convert-rest-test.sh `pwd`
+bash ../scripts/convert-rest-test.sh `pwd`
 
 case "$ARCHETYPE_ARTIFACT_ID" in
-    *mybatis3* | *jpa* ) bash ../../../todo/scripts/convert-todo-infra.sh `pwd` ;;
+    *mybatis3* | *jpa* ) bash ../../todo/scripts/convert-todo-infra.sh `pwd` ;;
     * ) ;;
 esac
 
-bash ../../../todo/scripts/convert-todo-css.sh `pwd`
+bash ../../todo/scripts/convert-todo-css.sh `pwd`
 
-bash ../../scripts/convert-rest-java.sh `pwd`
+bash ../scripts/convert-rest-java.sh `pwd`
 
-bash ../../scripts/convert-rest-msg.sh `pwd`
+bash ../scripts/convert-rest-msg.sh `pwd`
 
-bash ../../scripts/convert-rest-xml.sh `pwd`
-
-popd
+bash ../scripts/convert-rest-xml.sh `pwd`
 
 popd
