@@ -21,15 +21,11 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-pushd "$ARTIFACT_ID"
-
-bash ../../scripts/convert-todo-test.sh `pwd`
+bash ../scripts/convert-todo-test.sh `pwd`
 
 case "$ARCHETYPE_ARTIFACT_ID" in
-    *mybatis2* | *jpa* ) bash ../../scripts/convert-todo-infra.sh `pwd` ;;
+    *mybatis2* | *jpa* ) bash ../scripts/convert-todo-infra.sh `pwd` ;;
     * ) ;;
 esac
-
-popd
 
 popd

@@ -21,14 +21,10 @@ bash ../../common/scripts/generate-project.sh
 
 bash ../scripts/copy-sources.sh
 
-pushd "$ARTIFACT_ID"
+bash ../scripts/convert-security-jsp.sh `pwd`
 
-bash ../../scripts/convert-security-jsp.sh `pwd`
+bash ../scripts/convert-security-xml.sh `pwd`
 
-bash ../../scripts/convert-security-xml.sh `pwd`
-
-bash ../../scripts/convert-security-test.sh `pwd`
-
-popd
+bash ../scripts/convert-security-test.sh `pwd`
 
 popd
