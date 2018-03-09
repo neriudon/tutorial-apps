@@ -108,6 +108,6 @@ fi
 find ./${ARTIFACT_ID}/pom.xml | xargs sed -i -e 's|</properties>|    <selenium.version>2.46.0</selenium.version>\
     </properties>|'
 
-if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
+if test -n $TARGET_DIR; then
   popd
 fi
