@@ -274,7 +274,7 @@ sed -i -e 's|<sec:authentication-manager.*/>|<sec:authentication-manager>\
 WEB_XML=`find ./ -type f -name 'web.xml'`
 sed -i -e '/<?xml version="1.0" encoding="UTF-8"?>/,/<listener>/s|<listener>|<context-param>\
         <param-name>db.url</param-name>\
-        <param-value>jdbc:h2:mem:secure-login-test;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM '"'"'classpath:logback-ddl.sql'"'"'</param-value>\
+        <param-value>jdbc:h2:mem:secure-login;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM '"'"'classpath:logback-ddl.sql'"'"'</param-value>\
     </context-param>\
 \
     <context-param>\
