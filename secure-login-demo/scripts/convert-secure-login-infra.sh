@@ -8,7 +8,7 @@
 #   $1 : (Optional) Target project path to convert.
 
 TARGET_DIR=$1
-if test -n $TARGET_DIR; then
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   pushd "${TARGET_DIR}/${ARTIFACT_ID}"
 fi
 
@@ -22,6 +22,6 @@ mail.subject=Password Reissue URL
 
 app.applicationBaseUrl = http://${HOST_IP}:${APSRV_WEB_PORT}/${ARTIFACT_ID}-web" >>$i ; done
 
-if test -n $TARGET_DIR; then
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
 fi

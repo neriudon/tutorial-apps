@@ -4,7 +4,7 @@
 #   $1 : (Optional) Target project path to convert.
 
 TARGET_DIR=$1
-if test -n $TARGET_DIR; then
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   pushd "${TARGET_DIR}/${ARTIFACT_ID}"
 fi
 
@@ -38,6 +38,6 @@ com.example.securelogin.app.common.validation.StrongPassword.message = Password 
 com.example.securelogin.app.common.validation.NotReusedPassword.message = You must not reuse password.' >>$i ; done
 
 
-if test -n $TARGET_DIR; then
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
 fi
