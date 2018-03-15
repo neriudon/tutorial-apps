@@ -60,7 +60,7 @@ selenium.restOperations.connectTimeout=-1
 # If specified value is -1, use default value of URLConnection(system'"'"'s default timeout).
 selenium.restOperations.readTimeout=-1
 
-selenium.dbResetScript=database/H2-datareload.sql' >> $i ;done
+selenium.dbResetScript=META-INF/database/H2-datareload.sql' >> $i ;done
 
 # seleniumContext.xml
 SELENIUM_CONTEXT=`find ./ -type f -name 'seleniumContext.xml'`
