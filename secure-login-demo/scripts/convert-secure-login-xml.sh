@@ -272,11 +272,9 @@ sed -i -e 's|<sec:authentication-manager.*/>|<sec:authentication-manager>\
 
 # web.xml
 WEB_XML=`find ./ -type f -name 'web.xml'`
-LISTENER_LINE=`sed -n '/<listener>/=' "$WEB_XML" | head -n 1`
-sed -i -e "${LISTENER_LINE}i\
-    <context-param>\
+sed -i -e '/<?xml version="1.0" encoding="UTF-8"?>/,/<listener>/s|<listener>|<context-param>\
         <param-name>db.url</param-name>\
-        <param-value>jdbc:h2:mem:secure-login-test;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:logback-ddl.sql'</param-value>\
+        <param-value>jdbc:h2:mem:secure-login;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM '"'"'classpath:logback-ddl.sql'"'"'</param-value>\
     </context-param>\
 \
     <context-param>\
@@ -311,7 +309,8 @@ sed -i -e "${LISTENER_LINE}i\
     <servlet-mapping>\
         <servlet-name>H2Console</servlet-name>\
         <url-pattern>/admin/h2/*</url-pattern>\
-    </servlet-mapping>" "$WEB_XML"
+    </servlet-mapping>\
+    <listener>|' "$WEB_XML"
 
 if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
