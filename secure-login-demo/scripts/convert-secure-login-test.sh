@@ -8,12 +8,12 @@
 #   $1 : (Optional) Target project path to convert.
 
 TARGET_DIR=$1
-if test -n $TARGET_DIR; then
-  pushd "$TARGET_DIR"
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
+  pushd "${TARGET_DIR}/${ARTIFACT_ID}"
 fi
 
 # selenium/pom.xml
-SELENIUM_POM=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium -type f -name 'pom.xml'`
+SELENIUM_POM=`find ./${ARTIFACT_ID}-selenium -type f -name 'pom.xml'`
 sed -i -e 's|</dependencies>|\
         <dependency>\
             <groupId>org.hamcrest</groupId>\
@@ -29,11 +29,11 @@ sed -i -e 's|</dependencies>|\
     </dependencies>|' "$SELENIUM_POM"
 
 # selenium/-infra.properties
-SELENIUM_INFRA_PROPERTIES=`find ./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium -type f -name 'secure-login-infra.properties'`
+SELENIUM_INFRA_PROPERTIES=`find ./${ARTIFACT_ID}-selenium -type f -name 'secure-login-infra.properties'`
 sed -i -e "s|jdbc:h2:tcp://localhost:9212|jdbc:h2:tcp://${HOST_IP}:${APSRV_H2DB_PORT}|" "$SELENIUM_INFRA_PROPERTIES"
 
 # selenium.properties
-SELENIUM_PROPERTIES="./${ARTIFACT_ID}/${ARTIFACT_ID}-selenium/src/test/resources/META-INF/spring/selenium.properties"
+SELENIUM_PROPERTIES="./${ARTIFACT_ID}-selenium/src/test/resources/META-INF/spring/selenium.properties"
 for i in ${SELENIUM_PROPERTIES}; do echo -e 'selenium.enableCapture=false
 selenium.enablePageSource=false
 selenium.enableDbLog=false
@@ -151,6 +151,6 @@ sed -i -e 's|xsi:schemaLocation|\
 sed -i -e 's|spring-beans\.xsd|spring-beans\.xsd\
                         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd|' "$SELENIUM_CONTEXT"
 
-if test -n $TARGET_DIR; then
+if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
 fi
