@@ -7,10 +7,10 @@
 #   ${VERSION}=Version of tutorial project. If not specified, the default value is set.
 
 case "$ARCHETYPE_ARTIFACT_ID" in
-    terasoluna-gfw-web-blank-mybatis3-archetype )
+    terasoluna-gfw-web-blank-mybatis2-archetype )
         export ARTIFACT_ID=${ARTIFACT_ID:=first-spring-security-mybatis3}
         ;;
-    terasoluna-gfw-multi-web-blank-mybatis3-archetype )
+    terasoluna-gfw-multi-web-blank-mybatis2-archetype )
         export ARTIFACT_ID=${ARTIFACT_ID:=first-spring-security-mybatis3-multi}
         ;;
     * )

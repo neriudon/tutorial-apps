@@ -10,10 +10,10 @@ case "$ARCHETYPE_ARTIFACT_ID" in
     terasoluna-gfw-web-blank-archetype )
         export ARTIFACT_ID=${ARTIFACT_ID:=todo-api}
         ;;
-    terasoluna-gfw-web-blank-mybatis3-archetype )
+    terasoluna-gfw-web-blank-mybatis2-archetype )
         export ARTIFACT_ID=${ARTIFACT_ID:=todo-api-mybatis3}
         ;;
-    terasoluna-gfw-multi-web-blank-mybatis3-archetype )
+    terasoluna-gfw-multi-web-blank-mybatis2-archetype )
         export ARTIFACT_ID=${ARTIFACT_ID:=todo-api-mybatis3-multi}
         ;;
     terasoluna-gfw-web-blank-jpa-archetype )
