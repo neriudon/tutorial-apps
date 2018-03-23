@@ -27,12 +27,11 @@ The following table describe Shell scripts functionality.
 
 ## How to execute
 You can execute ``change-maven-settings.sh`` and then ``create-app.sh`` with no parameters to genarate tutorial applications.  
-First of all, you must set following environment variables.
+First of all, you set following environment variables.
 
-| Environment Variable | Description | Note |
-|:------------- |:----------------- |:----------------- |
-| ARCHETYPE_ARTIFACT_ID | Artifact ID of blank project's archetype. | You can choose archetypes from tutorial instructions explained in Development Guideline. |
-| ARCHETYPE_VERSION | Version of blank project's archetype. | (e.g. ``5.3.0.RELEASE``) |
-| GROUP_ID | Group ID of tutorial project. | You must set to same value as tutorial instructions explained in Development Guideline. |
-| ARTIFACT_ID | Artifact ID of tutorial project. | Basically, set to same value as tutorial instructions explained in Development Guideline. |
-| VERSION | Version of tutorial project. | Basically, set to same value as tutorial instructions explained in Development Guideline. |
+| Environment Variable | Description | Required or Optional | Note |
+|:------------- |:----------------- |:----------------- |:----------------- |
+| ARCHETYPE_ARTIFACT_ID | Artifact ID of blank project's archetype. | Required | You can choose archetypes from tutorial instructions explained in Development Guideline. |
+| ARCHETYPE_VERSION | Version of blank project's archetype. | Optional | Defaults to specified version in tutorial-apps pom.xml. (e.g. ``5.3.0.RELEASE``) |
+| ARTIFACT_ID | Artifact ID of tutorial project. | Optional | Defaults to value as tutorial instructions explained in Development Guideline. (e.g. ``todo``) |
+| VERSION | Version of tutorial project. | Optional | Defaults to ``1.0.0-SNAPSHOT``.|
