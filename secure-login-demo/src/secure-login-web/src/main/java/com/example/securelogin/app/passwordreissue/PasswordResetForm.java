@@ -31,20 +31,20 @@ import lombok.Data;
 @NotReusedPassword(usernamePropertyName = "username", newPasswordPropertyName = "newPassword")
 public class PasswordResetForm implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
-	private String username;
+    @NotNull
+    private String username;
 
-	@NotNull
-	private String token;
+    @NotNull
+    private String token;
 
-	@NotNull
-	private String secret;
+    @NotNull
+    private String secret;
 
-	@NotNull
-	private String newPassword;
+    @NotNull
+    private String newPassword;
 
-	@NotNull
-	private String confirmNewPassword;
+    @NotNull
+    private String confirmNewPassword;
 }
