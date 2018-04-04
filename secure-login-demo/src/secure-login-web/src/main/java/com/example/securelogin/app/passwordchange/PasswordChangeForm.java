@@ -33,18 +33,18 @@ import lombok.Data;
 @ConfirmOldPassword(usernamePropertyName = "username", oldPasswordPropertyName = "oldPassword")
 public class PasswordChangeForm implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
-	private String username;
+    @NotNull
+    private String username;
 
-	@NotNull
-	private String oldPassword;
+    @NotNull
+    private String oldPassword;
 
-	@NotNull
-	private String newPassword;
+    @NotNull
+    private String newPassword;
 
-	@NotNull
-	private String confirmNewPassword;
+    @NotNull
+    private String confirmNewPassword;
 
 }

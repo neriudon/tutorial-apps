@@ -42,141 +42,141 @@ import com.example.securelogin.domain.service.passwordhistory.PasswordHistorySha
 @Transactional
 public class AccountSharedServiceImpl implements AccountSharedService {
 
-	@Inject
-	AuthenticationEventSharedService authenticationEventSharedService;
+    @Inject
+    AuthenticationEventSharedService authenticationEventSharedService;
 
-	@Inject
-	PasswordHistorySharedService passwordHistorySharedService;
+    @Inject
+    PasswordHistorySharedService passwordHistorySharedService;
 
-	@Inject
-	AccountRepository accountRepository;
+    @Inject
+    AccountRepository accountRepository;
 
-	@Inject
-	PasswordEncoder passwordEncoder;
+    @Inject
+    PasswordEncoder passwordEncoder;
 
-	@Inject
-	DefaultClassicDateFactory dateFactory;
+    @Inject
+    DefaultClassicDateFactory dateFactory;
 
-	@Value("${security.lockingDurationSeconds}")
-	int lockingDurationSeconds;
+    @Value("${security.lockingDurationSeconds}")
+    int lockingDurationSeconds;
 
-	@Value("${security.lockingThreshold}")
-	int lockingThreshold;
+    @Value("${security.lockingThreshold}")
+    int lockingThreshold;
 
-	@Value("${security.passwordLifeTimeSeconds}")
-	int passwordLifeTimeSeconds;
+    @Value("${security.passwordLifeTimeSeconds}")
+    int passwordLifeTimeSeconds;
 
-	@Transactional(readOnly = true)
-	@Override
-	public Account findOne(String username) {
-		Account account = accountRepository.findOne(username);
+    @Transactional(readOnly = true)
+    @Override
+    public Account findOne(String username) {
+        Account account = accountRepository.findOne(username);
 
-		if (account == null) {
-			throw new ResourceNotFoundException(ResultMessages.error().add(
-					MessageKeys.E_SL_FA_5001, username));
-		}
-		return account;
-	}
+        if (account == null) {
+            throw new ResourceNotFoundException(ResultMessages.error().add(
+                    MessageKeys.E_SL_FA_5001, username));
+        }
+        return account;
+    }
 
-	@Transactional(readOnly = true)
-	@Override
-	public boolean exists(String username) {
-		Account account = accountRepository.findOne(username);
+    @Transactional(readOnly = true)
+    @Override
+    public boolean exists(String username) {
+        Account account = accountRepository.findOne(username);
 
-		if (account == null) {
-			return false;
-		}else{
-			return true;
-		}
-	}
-	
-	@Transactional(readOnly = true)
-	@Override
-	public boolean isLocked(String username) {
-		List<FailedAuthentication> failureEvents = authenticationEventSharedService
-				.findLatestFailureEvents(username, lockingThreshold);
+        if (account == null) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public boolean isLocked(String username) {
+        List<FailedAuthentication> failureEvents = authenticationEventSharedService
+                .findLatestFailureEvents(username, lockingThreshold);
 
-		if (failureEvents.size() < lockingThreshold) {
-			return false;
-		}
+        if (failureEvents.size() < lockingThreshold) {
+            return false;
+        }
 
-		if (failureEvents
-				.get(lockingThreshold - 1)
-				.getAuthenticationTimestamp()
-				.isBefore(
-						dateFactory.newTimestamp().toLocalDateTime()
-								.minusSeconds(lockingDurationSeconds))) {
-			return false;
-		}
+        if (failureEvents
+                .get(lockingThreshold - 1)
+                .getAuthenticationTimestamp()
+                .isBefore(
+                        dateFactory.newTimestamp().toLocalDateTime()
+                                .minusSeconds(lockingDurationSeconds))) {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Transactional(readOnly = true)
-	@Override
-	public LocalDateTime getLastLoginDate(String username) {
-		List<SuccessfulAuthentication> events = authenticationEventSharedService
-				.findLatestSuccessEvents(username, 1);
+    @Transactional(readOnly = true)
+    @Override
+    public LocalDateTime getLastLoginDate(String username) {
+        List<SuccessfulAuthentication> events = authenticationEventSharedService
+                .findLatestSuccessEvents(username, 1);
 
-		if (events.isEmpty()) {
-			return null;
-		} else {
-			return events.get(0).getAuthenticationTimestamp();
-		}
-	}
+        if (events.isEmpty()) {
+            return null;
+        } else {
+            return events.get(0).getAuthenticationTimestamp();
+        }
+    }
 
-	@Transactional(readOnly = true)
-	@Override
-	@Cacheable("isInitialPassword")
-	public boolean isInitialPassword(String username) {
-		List<PasswordHistory> passwordHistories = passwordHistorySharedService
-				.findLatest(username, 1);
-		return passwordHistories.isEmpty();
-	}
+    @Transactional(readOnly = true)
+    @Override
+    @Cacheable("isInitialPassword")
+    public boolean isInitialPassword(String username) {
+        List<PasswordHistory> passwordHistories = passwordHistorySharedService
+                .findLatest(username, 1);
+        return passwordHistories.isEmpty();
+    }
 
-	@Transactional(readOnly = true)
-	@Override
-	@Cacheable("isCurrentPasswordExpired")
-	public boolean isCurrentPasswordExpired(String username) {
-		List<PasswordHistory> passwordHistories = passwordHistorySharedService
-				.findLatest(username, 1);
+    @Transactional(readOnly = true)
+    @Override
+    @Cacheable("isCurrentPasswordExpired")
+    public boolean isCurrentPasswordExpired(String username) {
+        List<PasswordHistory> passwordHistories = passwordHistorySharedService
+                .findLatest(username, 1);
 
-		if (passwordHistories.isEmpty()) {
-			return true;
-		}
+        if (passwordHistories.isEmpty()) {
+            return true;
+        }
 
-		if (passwordHistories
-				.get(0)
-				.getUseFrom()
-				.isBefore(
-						dateFactory.newTimestamp().toLocalDateTime()
-								.minusSeconds(passwordLifeTimeSeconds))) {
-			return true;
-		}
+        if (passwordHistories
+                .get(0)
+                .getUseFrom()
+                .isBefore(
+                        dateFactory.newTimestamp().toLocalDateTime()
+                                .minusSeconds(passwordLifeTimeSeconds))) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	@CacheEvict(value = { "isInitialPassword", "isCurrentPasswordExpired" }, key = "#username")
-	public boolean updatePassword(String username, String rawPassword) {
-		String password = passwordEncoder.encode(rawPassword);
-		boolean result = accountRepository.updatePassword(username, password);
+    @Override
+    @CacheEvict(value = { "isInitialPassword", "isCurrentPasswordExpired" }, key = "#username")
+    public boolean updatePassword(String username, String rawPassword) {
+        String password = passwordEncoder.encode(rawPassword);
+        boolean result = accountRepository.updatePassword(username, password);
 
-		LocalDateTime passwordChangeDate = dateFactory.newTimestamp()
-				.toLocalDateTime();
+        LocalDateTime passwordChangeDate = dateFactory.newTimestamp()
+                .toLocalDateTime();
 
-		PasswordHistory passwordHistory = new PasswordHistory();
-		passwordHistory.setUsername(username);
-		passwordHistory.setPassword(password);
-		passwordHistory.setUseFrom(passwordChangeDate);
-		passwordHistorySharedService.insert(passwordHistory);
+        PasswordHistory passwordHistory = new PasswordHistory();
+        passwordHistory.setUsername(username);
+        passwordHistory.setPassword(password);
+        passwordHistory.setUseFrom(passwordChangeDate);
+        passwordHistorySharedService.insert(passwordHistory);
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	@CacheEvict(value = { "isInitialPassword", "isCurrentPasswordExpired" }, key = "#username")
-	public void clearPasswordValidationCache(String username) {
-	}
+    @Override
+    @CacheEvict(value = { "isInitialPassword", "isCurrentPasswordExpired" }, key = "#username")
+    public void clearPasswordValidationCache(String username) {
+    }
 }

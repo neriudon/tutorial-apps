@@ -22,18 +22,18 @@ import lombok.Data;
 
 @Data
 public class Account implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
-	private String firstName;
+    private String firstName;
 
-	private String lastName;
+    private String lastName;
 
-	private String email;
+    private String email;
 
-	private List<Role> roles;
+    private List<Role> roles;
 
 }
