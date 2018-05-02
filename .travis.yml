@@ -19,7 +19,7 @@ env:
     - TARGET_TUTORIAL=todo ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-jpa-archetype ARTIFACT_ID=todo-jpa
     - TARGET_TUTORIAL=todo ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-jpa-archetype ARTIFACT_ID=todo-jpa-multi
     # todo-rest
-    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-archetype ARTIFACT_ID=todo-api
+    - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-archety ARTIFACT_ID=todo-api
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-mybatis3-archetype ARTIFACT_ID=todo-api-mybatis3
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-multi-web-blank-mybatis3-archetype ARTIFACT_ID=todo-api-mybatis3-multi
     - TARGET_TUTORIAL=todo-rest ARCHETYPE_ARTIFACT_ID=terasoluna-gfw-web-blank-jpa-archetype ARTIFACT_ID=todo-api-jpa
@@ -49,7 +49,7 @@ script:
     
   - echo "==================== Generate Tutorial App ===================="
   - |
-    bash ./${TARGET_TUTORIAL}/scripts/create-app.sh
+    bash ./${TARGET_TUTORIAL}/scripts/create-app.sh || exit $?
     
   - echo "==================== Build Tutorial App and execute Tests ===================="
   - |
