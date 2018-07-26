@@ -53,7 +53,16 @@ if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
                 <artifactId>selenium-support</artifactId>\
                 <version>${selenium.version}</version>\
             </dependency>\
-\
+            <dependency>\
+                <groupId>io.github.bonigarcia</groupId>\
+                <artifactId>webdrivermanager</artifactId>\
+                <version>${webdrivermanager.version}</version>\
+            </dependency>\
+            <dependency>\
+                <groupId>com.google.guava</groupId>\
+                <artifactId>guava</artifactId>\
+                <version>${guava.version}</version>\
+            </dependency>\
         </dependencies>|'
 else
   # single project
@@ -97,15 +106,28 @@ else
             <artifactId>selenium-safari-driver</artifactId>\
             <version>${selenium.version}</version>\
             <scope>test</scope>\
+         </dependency>\
+         <dependency>\
+             <groupId>org.seleniumhq.selenium</groupId>\
+             <artifactId>selenium-support</artifactId>\
+            <version>${selenium.version}</version>\
         </dependency>\
         <dependency>\
-            <groupId>org.seleniumhq.selenium</groupId>\
-            <artifactId>selenium-support</artifactId>\
-            <version>${selenium.version}</version>|'
+            <groupId>io.github.bonigarcia</groupId>\
+            <artifactId>webdrivermanager</artifactId>\
+            <version>${webdrivermanager.version}</version>\
+            <scope>test</scope>\
+        </dependency>\
+        <dependency>\
+            <groupId>com.google.guava</groupId>\
+            <artifactId>guava</artifactId>\
+            <version>${guava.version}</version>|'
 fi
 
 # pom.xml
-find ./pom.xml | xargs sed -i -e 's|</properties>|    <selenium.version>2.46.0</selenium.version>\
+find ./pom.xml | xargs sed -i -e 's|</properties>|    <selenium.version>3.9.1</selenium.version>\
+        <webdrivermanager.version>2.1.0</webdrivermanager.version>\
+        <guava.version>23.5-jre</guava.version>\
     </properties>|'
 
 if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then

@@ -32,6 +32,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.slf4j.Logger;
@@ -72,6 +73,9 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
 
     @Inject
     protected PageSource pageSource;
+
+    @Inject
+    protected FirefoxDriverPrepare firefoxDriverPrepare;
 
     @Rule
     public TestName testName = new TestName();
@@ -190,7 +194,9 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
             profile.setPreference("brouser.startup.homepage_override.mstone",
                     "ignore");
             profile.setPreference("network.proxy.type", 0);
-            driver = new FirefoxDriver(profile);
+            FirefoxOptions options = new FirefoxOptions().setProfile(profile);
+            firefoxDriverPrepare.geckodriverSetup();
+            driver = new FirefoxDriver(options);
         }
 
         webDrivers.add(driver);

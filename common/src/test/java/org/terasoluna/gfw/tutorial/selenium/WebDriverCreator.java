@@ -16,21 +16,27 @@
 package org.terasoluna.gfw.tutorial.selenium;
 
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.springframework.context.support.ApplicationObjectSupport;
 
 public class WebDriverCreator extends ApplicationObjectSupport {
+
+    @Inject
+    protected FirefoxDriverPrepare firefoxDriverPrepare;
 
     /**
      * Create a default WebDriver (WebDriver defined in the bean file).
      * @return Default WebDriver
      */
     public WebDriver createDefaultWebDriver() {
+        firefoxDriverPrepare.geckodriverSetup();
         WebDriver webDriver = getApplicationContext().getBean(WebDriver.class);
         return webDriver;
     }
@@ -68,7 +74,9 @@ public class WebDriverCreator extends ApplicationObjectSupport {
         profile.setPreference("brouser.startup.homepage_override.mstone",
                 "ignore");
         profile.setPreference("network.proxy.type", 0);
-        return new FirefoxDriver(profile);
+        FirefoxOptions options = new FirefoxOptions().setProfile(profile);
+        firefoxDriverPrepare.geckodriverSetup();
+        return new FirefoxDriver(options);
     }
 
     /**
@@ -105,7 +113,9 @@ public class WebDriverCreator extends ApplicationObjectSupport {
                 "ignore");
         profile.setPreference("network.proxy.type", 0);
 
-        WebDriver webDriver = new FirefoxDriver(profile);
+        FirefoxOptions options = new FirefoxOptions().setProfile(profile);
+        firefoxDriverPrepare.geckodriverSetup();
+        WebDriver webDriver = new FirefoxDriver(options);
         webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return webDriver;
     }

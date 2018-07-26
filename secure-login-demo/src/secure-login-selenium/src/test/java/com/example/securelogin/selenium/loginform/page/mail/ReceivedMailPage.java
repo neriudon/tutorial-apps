@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.By.tagName;
 
 public class ReceivedMailPage extends AbstractPageObject {
@@ -41,6 +42,7 @@ public class ReceivedMailPage extends AbstractPageObject {
     }
 
     public String getLatestMailText() throws JsonParseException, JsonMappingException, IOException {
+        webDriverOperations.click(id("rawdata-tab"));
         ArrayNode mails = mapper.readValue(webDriverOperations.getText(tagName(
                 "pre")), ArrayNode.class);
         return mails.get(mails.size() - 1).get("text").asText();
