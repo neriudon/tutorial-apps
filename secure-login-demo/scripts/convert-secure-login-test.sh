@@ -186,8 +186,7 @@ sed -i -e 's|spring-beans\.xsd|spring-beans\.xsd\
 
 # FirefoxDriverPrepare.java
 FIREFOXDRIVER_PREPARE_JAVA=`find ./${ARTIFACT_ID}-selenium -type f -name 'FirefoxDriverPrepare.java'`
-sed -i -e 's|.proxyPass(userPassword)|.proxyPass(userPassword)\
-                                        .useMirror()|' "$FIREFOXDRIVER_PREPARE_JAVA"
+sed -i -e 's|setup()|useMirror().setup()|' "$FIREFOXDRIVER_PREPARE_JAVA"
 
 if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
