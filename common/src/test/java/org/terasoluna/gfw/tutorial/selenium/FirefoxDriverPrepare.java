@@ -34,9 +34,8 @@ public class FirefoxDriverPrepare {
 
     public void geckodriverSetup() {
         WebDriverManager.firefoxdriver().version(geckodriverVersion)
-                                        .proxyUser(userName)
-                                        .proxyPass(userPassword)
-                                        .proxy(httpServer).setup();
+                .forceCache().proxy(httpServer).proxyUser(userName).proxyPass(
+                        userPassword).setup();
     }
 
 }
