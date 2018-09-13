@@ -53,7 +53,11 @@ if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
                 <artifactId>selenium-support</artifactId>\
                 <version>${selenium.version}</version>\
             </dependency>\
-\
+            <dependency>\
+                <groupId>io.github.bonigarcia</groupId>\
+                <artifactId>webdrivermanager</artifactId>\
+                <version>${webdrivermanager.version}</version>\
+            </dependency>\
         </dependencies>|'
 else
   # single project
@@ -97,15 +101,21 @@ else
             <artifactId>selenium-safari-driver</artifactId>\
             <version>${selenium.version}</version>\
             <scope>test</scope>\
+         </dependency>\
+         <dependency>\
+             <groupId>org.seleniumhq.selenium</groupId>\
+             <artifactId>selenium-support</artifactId>\
+            <version>${selenium.version}</version>\
         </dependency>\
         <dependency>\
-            <groupId>org.seleniumhq.selenium</groupId>\
-            <artifactId>selenium-support</artifactId>\
-            <version>${selenium.version}</version>|'
+            <groupId>io.github.bonigarcia</groupId>\
+            <artifactId>webdrivermanager</artifactId>\
+            <version>${webdrivermanager.version}</version>|'
 fi
 
 # pom.xml
-find ./pom.xml | xargs sed -i -e 's|</properties>|    <selenium.version>2.46.0</selenium.version>\
+find ./pom.xml | xargs sed -i -e 's|</properties>|    <selenium.version>3.0.1</selenium.version>\
+        <webdrivermanager.version>1.6.2</webdrivermanager.version>\
     </properties>|'
 
 if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then

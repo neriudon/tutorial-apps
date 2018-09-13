@@ -30,6 +30,12 @@ sed -i -e 's|</dependencies>|\
             <artifactId>h2</artifactId>\
             <scope>test</scope>\
         </dependency>\
+\
+        <dependency>\
+                <groupId>io.github.bonigarcia</groupId>\
+                <artifactId>webdrivermanager</artifactId>\
+                <scope>test</scope>\
+            </dependency>\
     </dependencies>|' "$SELENIUM_POM"
 
 sed -i -e 's|</project>|\
@@ -67,6 +73,14 @@ selenium.enableDbLog=false
 selenium.evidenceBaseDirectory=./evidence
 selenium.dbHost='"${HOST_IP}"'
 selenium.dbPort='"${APSRV_H2DB_PORT}"'
+
+# Proxy authentication setting.
+selenium.proxyUserName=
+selenium.proxyUserPassword=
+selenium.proxyHttpServer=
+
+# Webdriver version.
+selenium.geckodriverVersion=0.14.0
 
 # Allowable value is STANDARD or JAVASCRIPT(Default). See the JavaDoc of org.terasoluna.gfw.tutorial.selenium.WebDriverInputFieldAccessor.
 # STANDARD   : for release.
@@ -153,6 +167,8 @@ sed -i -e 's|</beans>|\
     </bean>\
 \
     <bean class="org.terasoluna.gfw.tutorial.selenium.WebDriverCreator" />\
+\
+    <bean id="firefoxDriverPrepare" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverPrepare" />\
 </beans>|' "$SELENIUM_CONTEXT"
 
 sed -i -e 's|xsi:schemaLocation|\
@@ -161,6 +177,10 @@ sed -i -e 's|xsi:schemaLocation|\
 
 sed -i -e 's|spring-beans\.xsd|spring-beans\.xsd\
                         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd|' "$SELENIUM_CONTEXT"
+
+# FirefoxDriverPrepare.java  
+FIREFOXDRIVER_PREPARE_JAVA=`find ./${ARTIFACT_ID}-selenium -type f -name 'FirefoxDriverPrepare.java'`
+sed -i -e 's|.proxyPass(userPassword)|.proxyPass(userPassword).useTaobaoMirror()|' "$FIREFOXDRIVER_PREPARE_JAVA"
 
 if test -n "${TARGET_DIR}/${ARTIFACT_ID}"; then
   popd
