@@ -82,6 +82,10 @@ selenium.proxyHttpServer=
 # Webdriver version.
 selenium.geckodriverVersion=0.14.0
 
+# Webdriver wait time.
+selenium.webDriverWait=5
+selenium.webDriverSleepWait=100
+
 # Allowable value is STANDARD or JAVASCRIPT(Default). See the JavaDoc of org.terasoluna.gfw.tutorial.selenium.WebDriverInputFieldAccessor.
 # STANDARD   : for release.
 # JAVASCRIPT : for development and iteration testing.
@@ -167,6 +171,8 @@ sed -i -e 's|</beans>|\
     </bean>\
 \
     <bean class="org.terasoluna.gfw.tutorial.selenium.WebDriverCreator" />\
+\
+    <bean id="waitWebDriverEventListener" class="org.terasoluna.gfw.tutorial.selenium.WaitWebDriverEventListener" />\
 \
     <bean id="firefoxDriverPrepare" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverPrepare" />\
 </beans>|' "$SELENIUM_CONTEXT"

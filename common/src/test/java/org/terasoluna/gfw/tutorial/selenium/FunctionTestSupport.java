@@ -35,7 +35,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,8 +53,6 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     protected static WebDriver driver;
 
     private static final Set<WebDriver> webDrivers = new HashSet<WebDriver>();
-
-    protected static WebDriverEventListener waitWebDriverEventListener;
 
     protected static EventFiringWebDriver eventFiringWebDriver;
 
@@ -170,7 +167,8 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
         if (driver == null) {
             driver = newWebDriver();
             eventFiringWebDriver = new EventFiringWebDriver(driver);
-            waitWebDriverEventListener = new WaitWebDriverEventListener();
+            WaitWebDriverEventListener waitWebDriverEventListener = getApplicationContext()
+                    .getBean(WaitWebDriverEventListener.class);
             driver = eventFiringWebDriver.register(waitWebDriverEventListener);
         }
         driver.manage().timeouts().implicitlyWait(
@@ -213,7 +211,7 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     protected void quitDefaultWebDriver() {
         if (driver != null) {
             try {
-                driver.get("about:config"); 
+                driver.get("about:config");
                 driver.quit();
             } finally {
                 driver = null;
@@ -240,7 +238,7 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
     private static void quitWebDrivers() {
         for (WebDriver webDriver : webDrivers) {
             try {
-                webDriver.get("about:config"); 
+                webDriver.get("about:config");
                 webDriver.quit();
             } catch (Throwable t) {
                 classLogger.error("failed quit.", t);

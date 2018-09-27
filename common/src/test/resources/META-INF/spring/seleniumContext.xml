@@ -18,6 +18,8 @@
 
   <bean id="firefoxDriverPrepare" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverPrepare" />
 
+  <bean id="waitWebDriverEventListener" class="org.terasoluna.gfw.tutorial.selenium.WaitWebDriverEventListener" />
+
   <!-- Settings for WebDrivers -->
   <beans profile="firefox default">
     <bean id="webDriver" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverFactoryBean"

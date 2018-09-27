@@ -19,24 +19,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Value;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openqa.selenium.TimeoutException;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.JavascriptExecutor;
 
-public class WaitWebDriverEventListener extends
-                                                WebDriverEventListenerAdapter {
+public class WaitWebDriverEventListener extends WebDriverEventListenerAdapter {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected static Wait<WebDriver> wait;
+    protected Wait<WebDriver> wait;
 
-    protected long webDriverWait = 5;
+    @Value("${selenium.webDriverWait}")
+    protected long webDriverWait;
 
-    protected long webDriverSleepWait = 100;
+    @Value("${selenium.webDriverSleepWait}")
+    protected long webDriverSleepWait;
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
