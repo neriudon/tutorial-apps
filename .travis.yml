@@ -54,11 +54,12 @@ script:
   - echo "==================== Build Tutorial App and execute Tests ===================="
   - |
     POM=./${TARGET_TUTORIAL}/target-project/${ARTIFACT_ID}/pom.xml
+    TESTOPTION="-Dwdm.gitHubTokenName=${WDM_GITHUB_USER} -Dwdm.gitHubTokenSecret=${WDM_GITHUB_TOKEN}"
     if test `echo $ARCHETYPE_ARTIFACT_ID | grep multi`;then
       echo "execute ./mvn-multiproject-build"
-      bash ./common/scripts/mvn-multiproject-build.sh "$POM"
+      bash ./common/scripts/mvn-multiproject-build.sh "$POM" "$TESTOPTION"
     else
       echo "execute ./mvn-singleproject-build"
-      bash ./common/scripts/mvn-singleproject-build.sh "$POM"
+      bash ./common/scripts/mvn-singleproject-build.sh "$POM" "$TESTOPTION"
     fi
     exit $?
