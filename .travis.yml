@@ -60,6 +60,6 @@ script:
       bash ./common/scripts/mvn-multiproject-build.sh "$POM" "$TESTOPTION"
     else
       echo "execute ./mvn-singleproject-build"
-      bash ./common/scripts/mvn-singleproject-build.sh "$POM" "$TESTOPTION"
+      bash ./common/scripts/mvn-singleproject-build.sh "$POM" "\"$TESTOPTION\""
     fi
     exit $?
