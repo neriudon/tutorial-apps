@@ -30,12 +30,6 @@ sed -i -e 's|</dependencies>|\
             <artifactId>h2</artifactId>\
             <scope>test</scope>\
         </dependency>\
-\
-        <dependency>\
-                <groupId>io.github.bonigarcia</groupId>\
-                <artifactId>webdrivermanager</artifactId>\
-                <scope>test</scope>\
-            </dependency>\
     </dependencies>|' "$SELENIUM_POM"
 
 sed -i -e 's|</project>|\
@@ -175,6 +169,12 @@ sed -i -e 's|</beans>|\
     <bean id="waitWebDriverEventListener" class="org.terasoluna.gfw.tutorial.selenium.WaitWebDriverEventListener" />\
 \
     <bean id="firefoxDriverPrepare" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverPrepare" />\
+\
+    <beans profile="firefox default">\
+        <bean id="webDriver" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverFactoryBean"\
+        scope="prototype" />\
+    </beans>\
+\
 </beans>|' "$SELENIUM_CONTEXT"
 
 sed -i -e 's|xsi:schemaLocation|\

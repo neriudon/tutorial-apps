@@ -196,11 +196,11 @@ public class FunctionTestSupport extends ApplicationObjectSupport {
         }
 
         if (driver == null) {
+            firefoxDriverPrepare.geckodriverSetup();
             FirefoxProfile profile = new FirefoxProfile();
             profile.setPreference("brouser.startup.homepage_override.mstone",
                     "ignore");
             profile.setPreference("network.proxy.type", 0);
-            firefoxDriverPrepare.geckodriverSetup();
             driver = new FirefoxDriver(profile);
         }
 
