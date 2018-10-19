@@ -30,12 +30,6 @@ sed -i -e 's|</dependencies>|\
             <artifactId>h2</artifactId>\
             <scope>test</scope>\
         </dependency>\
-\
-        <dependency>\
-                <groupId>io.github.bonigarcia</groupId>\
-                <artifactId>webdrivermanager</artifactId>\
-                <scope>test</scope>\
-            </dependency>\
     </dependencies>|' "$SELENIUM_POM"
 
 sed -i -e 's|</project>|\
