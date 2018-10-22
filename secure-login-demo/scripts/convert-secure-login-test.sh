@@ -104,7 +104,11 @@ selenium.dbResetScript=database/H2-datareload.sql' >> $i ;done
 
 # seleniumContext.xml
 SELENIUM_CONTEXT=`find ./ -type f -name 'seleniumContext.xml'`
-sed -i -e 's|</beans>|\
+sed -i -e 's|\
+    <bean id="webDriver" class="xxxxxx.yyyyyy.zzzzzz.selenium.welcome.FirefoxDriverFactoryBean"\
+        scope="prototype" />\
+\
+</beans>|\
     <bean id="realDataSource" class="org.apache.commons.dbcp2.BasicDataSource"\
         destroy-method="close">\
         <property name="driverClassName" value="org.h2.Driver" />\
@@ -169,6 +173,12 @@ sed -i -e 's|</beans>|\
     <bean id="waitWebDriverEventListener" class="org.terasoluna.gfw.tutorial.selenium.WaitWebDriverEventListener" />\
 \
     <bean id="firefoxDriverPrepare" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverPrepare" />\
+\
+    <beans profile="firefox default">\
+        <bean id="webDriver" class="org.terasoluna.gfw.tutorial.selenium.FirefoxDriverFactoryBean"\
+        scope="prototype" />\
+    </beans>\
+\
 </beans>|' "$SELENIUM_CONTEXT"
 
 sed -i -e 's|xsi:schemaLocation|\
